@@ -1,0 +1,15 @@
+syntax = "proto3";
+package mavs.mavs;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+
+option go_package = "github.com/emaforlin/mAVS/x/mavs/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (amino.name) = "mavs/x/mavs/Params";
+  option (gogoproto.equal) = true;
+
+  
+}
