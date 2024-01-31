@@ -1,0 +1,12 @@
+syntax = "proto3";
+package mavs.mavs;
+
+option go_package = "github.com/emaforlin/mAVS/x/mavs/types";
+
+message StoredVoting {
+  string index = 1; 
+  string title = 2; 
+  uint64 votes = 3; 
+  
+}
+

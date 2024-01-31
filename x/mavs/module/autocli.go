@@ -22,6 +22,17 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Use:       "show-system-info",
 					Short:     "show systemInfo",
 				},
+				{
+					RpcMethod: "StoredVotingAll",
+					Use:       "list-stored-voting",
+					Short:     "List all storedVoting",
+				},
+				{
+					RpcMethod:      "StoredVoting",
+					Use:            "show-stored-voting [id]",
+					Short:          "Shows a storedVoting",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "index"}},
+				},
 				// this line is used by ignite scaffolding # autocli/query
 			},
 		},

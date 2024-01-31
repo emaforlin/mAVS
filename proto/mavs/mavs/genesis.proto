@@ -6,6 +6,7 @@ import "amino/amino.proto";
 import "gogoproto/gogo.proto";
 import "mavs/mavs/params.proto";
 import "mavs/mavs/system_info.proto";
+import "mavs/mavs/stored_voting.proto";
 
 option go_package = "github.com/emaforlin/mAVS/x/mavs/types";
 
@@ -13,7 +14,8 @@ option go_package = "github.com/emaforlin/mAVS/x/mavs/types";
 message GenesisState {
   
   // params defines all the parameters of the module.
-  Params     params     = 1 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
-  SystemInfo systemInfo = 2;
+           Params       params           = 1 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
+           SystemInfo   systemInfo       = 2;
+  repeated StoredVoting storedVotingList = 3 [(gogoproto.nullable) = false] ;
 }
 

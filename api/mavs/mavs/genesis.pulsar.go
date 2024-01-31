@@ -14,10 +14,62 @@ import (
 	sync "sync"
 )
 
+var _ protoreflect.List = (*_GenesisState_3_list)(nil)
+
+type _GenesisState_3_list struct {
+	list *[]*StoredVoting
+}
+
+func (x *_GenesisState_3_list) Len() int {
+	if x.list == nil {
+		return 0
+	}
+	return len(*x.list)
+}
+
+func (x *_GenesisState_3_list) Get(i int) protoreflect.Value {
+	return protoreflect.ValueOfMessage((*x.list)[i].ProtoReflect())
+}
+
+func (x *_GenesisState_3_list) Set(i int, value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*StoredVoting)
+	(*x.list)[i] = concreteValue
+}
+
+func (x *_GenesisState_3_list) Append(value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*StoredVoting)
+	*x.list = append(*x.list, concreteValue)
+}
+
+func (x *_GenesisState_3_list) AppendMutable() protoreflect.Value {
+	v := new(StoredVoting)
+	*x.list = append(*x.list, v)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_GenesisState_3_list) Truncate(n int) {
+	for i := n; i < len(*x.list); i++ {
+		(*x.list)[i] = nil
+	}
+	*x.list = (*x.list)[:n]
+}
+
+func (x *_GenesisState_3_list) NewElement() protoreflect.Value {
+	v := new(StoredVoting)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_GenesisState_3_list) IsValid() bool {
+	return x.list != nil
+}
+
 var (
-	md_GenesisState            protoreflect.MessageDescriptor
-	fd_GenesisState_params     protoreflect.FieldDescriptor
-	fd_GenesisState_systemInfo protoreflect.FieldDescriptor
+	md_GenesisState                  protoreflect.MessageDescriptor
+	fd_GenesisState_params           protoreflect.FieldDescriptor
+	fd_GenesisState_systemInfo       protoreflect.FieldDescriptor
+	fd_GenesisState_storedVotingList protoreflect.FieldDescriptor
 )
 
 func init() {
@@ -25,6 +77,7 @@ func init() {
 	md_GenesisState = File_mavs_mavs_genesis_proto.Messages().ByName("GenesisState")
 	fd_GenesisState_params = md_GenesisState.Fields().ByName("params")
 	fd_GenesisState_systemInfo = md_GenesisState.Fields().ByName("systemInfo")
+	fd_GenesisState_storedVotingList = md_GenesisState.Fields().ByName("storedVotingList")
 }
 
 var _ protoreflect.Message = (*fastReflection_GenesisState)(nil)
@@ -104,6 +157,12 @@ func (x *fastReflection_GenesisState) Range(f func(protoreflect.FieldDescriptor,
 			return
 		}
 	}
+	if len(x.StoredVotingList) != 0 {
+		value := protoreflect.ValueOfList(&_GenesisState_3_list{list: &x.StoredVotingList})
+		if !f(fd_GenesisState_storedVotingList, value) {
+			return
+		}
+	}
 }
 
 // Has reports whether a field is populated.
@@ -123,6 +182,8 @@ func (x *fastReflection_GenesisState) Has(fd protoreflect.FieldDescriptor) bool 
 		return x.Params != nil
 	case "mavs.mavs.GenesisState.systemInfo":
 		return x.SystemInfo != nil
+	case "mavs.mavs.GenesisState.storedVotingList":
+		return len(x.StoredVotingList) != 0
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: mavs.mavs.GenesisState"))
@@ -143,6 +204,8 @@ func (x *fastReflection_GenesisState) Clear(fd protoreflect.FieldDescriptor) {
 		x.Params = nil
 	case "mavs.mavs.GenesisState.systemInfo":
 		x.SystemInfo = nil
+	case "mavs.mavs.GenesisState.storedVotingList":
+		x.StoredVotingList = nil
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: mavs.mavs.GenesisState"))
@@ -165,6 +228,12 @@ func (x *fastReflection_GenesisState) Get(descriptor protoreflect.FieldDescripto
 	case "mavs.mavs.GenesisState.systemInfo":
 		value := x.SystemInfo
 		return protoreflect.ValueOfMessage(value.ProtoReflect())
+	case "mavs.mavs.GenesisState.storedVotingList":
+		if len(x.StoredVotingList) == 0 {
+			return protoreflect.ValueOfList(&_GenesisState_3_list{})
+		}
+		listValue := &_GenesisState_3_list{list: &x.StoredVotingList}
+		return protoreflect.ValueOfList(listValue)
 	default:
 		if descriptor.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: mavs.mavs.GenesisState"))
@@ -189,6 +258,10 @@ func (x *fastReflection_GenesisState) Set(fd protoreflect.FieldDescriptor, value
 		x.Params = value.Message().Interface().(*Params)
 	case "mavs.mavs.GenesisState.systemInfo":
 		x.SystemInfo = value.Message().Interface().(*SystemInfo)
+	case "mavs.mavs.GenesisState.storedVotingList":
+		lv := value.List()
+		clv := lv.(*_GenesisState_3_list)
+		x.StoredVotingList = *clv.list
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: mavs.mavs.GenesisState"))
@@ -219,6 +292,12 @@ func (x *fastReflection_GenesisState) Mutable(fd protoreflect.FieldDescriptor) p
 			x.SystemInfo = new(SystemInfo)
 		}
 		return protoreflect.ValueOfMessage(x.SystemInfo.ProtoReflect())
+	case "mavs.mavs.GenesisState.storedVotingList":
+		if x.StoredVotingList == nil {
+			x.StoredVotingList = []*StoredVoting{}
+		}
+		value := &_GenesisState_3_list{list: &x.StoredVotingList}
+		return protoreflect.ValueOfList(value)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: mavs.mavs.GenesisState"))
@@ -238,6 +317,9 @@ func (x *fastReflection_GenesisState) NewField(fd protoreflect.FieldDescriptor) 
 	case "mavs.mavs.GenesisState.systemInfo":
 		m := new(SystemInfo)
 		return protoreflect.ValueOfMessage(m.ProtoReflect())
+	case "mavs.mavs.GenesisState.storedVotingList":
+		list := []*StoredVoting{}
+		return protoreflect.ValueOfList(&_GenesisState_3_list{list: &list})
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: mavs.mavs.GenesisState"))
@@ -315,6 +397,12 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 			l = options.Size(x.SystemInfo)
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
+		if len(x.StoredVotingList) > 0 {
+			for _, e := range x.StoredVotingList {
+				l = options.Size(e)
+				n += 1 + l + runtime.Sov(uint64(l))
+			}
+		}
 		if x.unknownFields != nil {
 			n += len(x.unknownFields)
 		}
@@ -343,6 +431,22 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 		if x.unknownFields != nil {
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
+		}
+		if len(x.StoredVotingList) > 0 {
+			for iNdEx := len(x.StoredVotingList) - 1; iNdEx >= 0; iNdEx-- {
+				encoded, err := options.Marshal(x.StoredVotingList[iNdEx])
+				if err != nil {
+					return protoiface.MarshalOutput{
+						NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+						Buf:               input.Buf,
+					}, err
+				}
+				i -= len(encoded)
+				copy(dAtA[i:], encoded)
+				i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
+				i--
+				dAtA[i] = 0x1a
+			}
 		}
 		if x.SystemInfo != nil {
 			encoded, err := options.Marshal(x.SystemInfo)
@@ -493,6 +597,40 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
 				}
 				iNdEx = postIndex
+			case 3:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field StoredVotingList", wireType)
+				}
+				var msglen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					msglen |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if msglen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + msglen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.StoredVotingList = append(x.StoredVotingList, &StoredVoting{})
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.StoredVotingList[len(x.StoredVotingList)-1]); err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				iNdEx = postIndex
 			default:
 				iNdEx = preIndex
 				skippy, err := runtime.Skip(dAtA[iNdEx:])
@@ -548,8 +686,9 @@ type GenesisState struct {
 	unknownFields protoimpl.UnknownFields
 
 	// params defines all the parameters of the module.
-	Params     *Params     `protobuf:"bytes,1,opt,name=params,proto3" json:"params,omitempty"`
-	SystemInfo *SystemInfo `protobuf:"bytes,2,opt,name=systemInfo,proto3" json:"systemInfo,omitempty"`
+	Params           *Params         `protobuf:"bytes,1,opt,name=params,proto3" json:"params,omitempty"`
+	SystemInfo       *SystemInfo     `protobuf:"bytes,2,opt,name=systemInfo,proto3" json:"systemInfo,omitempty"`
+	StoredVotingList []*StoredVoting `protobuf:"bytes,3,rep,name=storedVotingList,proto3" json:"storedVotingList,omitempty"`
 }
 
 func (x *GenesisState) Reset() {
@@ -586,6 +725,13 @@ func (x *GenesisState) GetSystemInfo() *SystemInfo {
 	return nil
 }
 
+func (x *GenesisState) GetStoredVotingList() []*StoredVoting {
+	if x != nil {
+		return x.StoredVotingList
+	}
+	return nil
+}
+
 var File_mavs_mavs_genesis_proto protoreflect.FileDescriptor
 
 var file_mavs_mavs_genesis_proto_rawDesc = []byte{
@@ -597,23 +743,30 @@ var file_mavs_mavs_genesis_proto_rawDesc = []byte{
 	0x61, 0x76, 0x73, 0x2f, 0x6d, 0x61, 0x76, 0x73, 0x2f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x2e,
 	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x1b, 0x6d, 0x61, 0x76, 0x73, 0x2f, 0x6d, 0x61, 0x76, 0x73,
 	0x2f, 0x73, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x5f, 0x69, 0x6e, 0x66, 0x6f, 0x2e, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x22, 0x7b, 0x0a, 0x0c, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x53, 0x74, 0x61,
+	0x74, 0x6f, 0x1a, 0x1d, 0x6d, 0x61, 0x76, 0x73, 0x2f, 0x6d, 0x61, 0x76, 0x73, 0x2f, 0x73, 0x74,
+	0x6f, 0x72, 0x65, 0x64, 0x5f, 0x76, 0x6f, 0x74, 0x69, 0x6e, 0x67, 0x2e, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x22, 0xc6, 0x01, 0x0a, 0x0c, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x53, 0x74, 0x61,
 	0x74, 0x65, 0x12, 0x34, 0x0a, 0x06, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x18, 0x01, 0x20, 0x01,
 	0x28, 0x0b, 0x32, 0x11, 0x2e, 0x6d, 0x61, 0x76, 0x73, 0x2e, 0x6d, 0x61, 0x76, 0x73, 0x2e, 0x50,
 	0x61, 0x72, 0x61, 0x6d, 0x73, 0x42, 0x09, 0xc8, 0xde, 0x1f, 0x00, 0xa8, 0xe7, 0xb0, 0x2a, 0x01,
 	0x52, 0x06, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x35, 0x0a, 0x0a, 0x73, 0x79, 0x73, 0x74,
 	0x65, 0x6d, 0x49, 0x6e, 0x66, 0x6f, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x15, 0x2e, 0x6d,
 	0x61, 0x76, 0x73, 0x2e, 0x6d, 0x61, 0x76, 0x73, 0x2e, 0x53, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x49,
-	0x6e, 0x66, 0x6f, 0x52, 0x0a, 0x73, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x49, 0x6e, 0x66, 0x6f, 0x42,
-	0x7e, 0x0a, 0x0d, 0x63, 0x6f, 0x6d, 0x2e, 0x6d, 0x61, 0x76, 0x73, 0x2e, 0x6d, 0x61, 0x76, 0x73,
-	0x42, 0x0c, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01,
-	0x5a, 0x1a, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x73, 0x64, 0x6b, 0x2e, 0x69, 0x6f, 0x2f, 0x61,
-	0x70, 0x69, 0x2f, 0x6d, 0x61, 0x76, 0x73, 0x2f, 0x6d, 0x61, 0x76, 0x73, 0xa2, 0x02, 0x03, 0x4d,
-	0x4d, 0x58, 0xaa, 0x02, 0x09, 0x4d, 0x61, 0x76, 0x73, 0x2e, 0x4d, 0x61, 0x76, 0x73, 0xca, 0x02,
-	0x09, 0x4d, 0x61, 0x76, 0x73, 0x5c, 0x4d, 0x61, 0x76, 0x73, 0xe2, 0x02, 0x15, 0x4d, 0x61, 0x76,
-	0x73, 0x5c, 0x4d, 0x61, 0x76, 0x73, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61,
-	0x74, 0x61, 0xea, 0x02, 0x0a, 0x4d, 0x61, 0x76, 0x73, 0x3a, 0x3a, 0x4d, 0x61, 0x76, 0x73, 0x62,
-	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x6e, 0x66, 0x6f, 0x52, 0x0a, 0x73, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x49, 0x6e, 0x66, 0x6f, 0x12,
+	0x49, 0x0a, 0x10, 0x73, 0x74, 0x6f, 0x72, 0x65, 0x64, 0x56, 0x6f, 0x74, 0x69, 0x6e, 0x67, 0x4c,
+	0x69, 0x73, 0x74, 0x18, 0x03, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x17, 0x2e, 0x6d, 0x61, 0x76, 0x73,
+	0x2e, 0x6d, 0x61, 0x76, 0x73, 0x2e, 0x53, 0x74, 0x6f, 0x72, 0x65, 0x64, 0x56, 0x6f, 0x74, 0x69,
+	0x6e, 0x67, 0x42, 0x04, 0xc8, 0xde, 0x1f, 0x00, 0x52, 0x10, 0x73, 0x74, 0x6f, 0x72, 0x65, 0x64,
+	0x56, 0x6f, 0x74, 0x69, 0x6e, 0x67, 0x4c, 0x69, 0x73, 0x74, 0x42, 0x7e, 0x0a, 0x0d, 0x63, 0x6f,
+	0x6d, 0x2e, 0x6d, 0x61, 0x76, 0x73, 0x2e, 0x6d, 0x61, 0x76, 0x73, 0x42, 0x0c, 0x47, 0x65, 0x6e,
+	0x65, 0x73, 0x69, 0x73, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x1a, 0x63, 0x6f, 0x73,
+	0x6d, 0x6f, 0x73, 0x73, 0x64, 0x6b, 0x2e, 0x69, 0x6f, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x6d, 0x61,
+	0x76, 0x73, 0x2f, 0x6d, 0x61, 0x76, 0x73, 0xa2, 0x02, 0x03, 0x4d, 0x4d, 0x58, 0xaa, 0x02, 0x09,
+	0x4d, 0x61, 0x76, 0x73, 0x2e, 0x4d, 0x61, 0x76, 0x73, 0xca, 0x02, 0x09, 0x4d, 0x61, 0x76, 0x73,
+	0x5c, 0x4d, 0x61, 0x76, 0x73, 0xe2, 0x02, 0x15, 0x4d, 0x61, 0x76, 0x73, 0x5c, 0x4d, 0x61, 0x76,
+	0x73, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x0a,
+	0x4d, 0x61, 0x76, 0x73, 0x3a, 0x3a, 0x4d, 0x61, 0x76, 0x73, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x33,
 }
 
 var (
@@ -633,15 +786,17 @@ var file_mavs_mavs_genesis_proto_goTypes = []interface{}{
 	(*GenesisState)(nil), // 0: mavs.mavs.GenesisState
 	(*Params)(nil),       // 1: mavs.mavs.Params
 	(*SystemInfo)(nil),   // 2: mavs.mavs.SystemInfo
+	(*StoredVoting)(nil), // 3: mavs.mavs.StoredVoting
 }
 var file_mavs_mavs_genesis_proto_depIdxs = []int32{
 	1, // 0: mavs.mavs.GenesisState.params:type_name -> mavs.mavs.Params
 	2, // 1: mavs.mavs.GenesisState.systemInfo:type_name -> mavs.mavs.SystemInfo
-	2, // [2:2] is the sub-list for method output_type
-	2, // [2:2] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	3, // 2: mavs.mavs.GenesisState.storedVotingList:type_name -> mavs.mavs.StoredVoting
+	3, // [3:3] is the sub-list for method output_type
+	3, // [3:3] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_mavs_mavs_genesis_proto_init() }
@@ -651,6 +806,7 @@ func file_mavs_mavs_genesis_proto_init() {
 	}
 	file_mavs_mavs_params_proto_init()
 	file_mavs_mavs_system_info_proto_init()
+	file_mavs_mavs_stored_voting_proto_init()
 	if !protoimpl.UnsafeEnabled {
 		file_mavs_mavs_genesis_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GenesisState); i {

@@ -17,6 +17,14 @@ func TestGenesis(t *testing.T) {
 		SystemInfo: &types.SystemInfo{
 			NextId: 58,
 		},
+		StoredVotingList: []types.StoredVoting{
+			{
+				Index: "0",
+			},
+			{
+				Index: "1",
+			},
+		},
 		// this line is used by starport scaffolding # genesis/test/state
 	}
 
@@ -29,5 +37,6 @@ func TestGenesis(t *testing.T) {
 	nullify.Fill(got)
 
 	require.Equal(t, genesisState.SystemInfo, got.SystemInfo)
+	require.ElementsMatch(t, genesisState.StoredVotingList, got.StoredVotingList)
 	// this line is used by starport scaffolding # genesis/test/assert
 }

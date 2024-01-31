@@ -19,8 +19,10 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Query_Params_FullMethodName     = "/mavs.mavs.Query/Params"
-	Query_SystemInfo_FullMethodName = "/mavs.mavs.Query/SystemInfo"
+	Query_Params_FullMethodName          = "/mavs.mavs.Query/Params"
+	Query_SystemInfo_FullMethodName      = "/mavs.mavs.Query/SystemInfo"
+	Query_StoredVoting_FullMethodName    = "/mavs.mavs.Query/StoredVoting"
+	Query_StoredVotingAll_FullMethodName = "/mavs.mavs.Query/StoredVotingAll"
 )
 
 // QueryClient is the client API for Query service.
@@ -31,6 +33,9 @@ type QueryClient interface {
 	Params(ctx context.Context, in *QueryParamsRequest, opts ...grpc.CallOption) (*QueryParamsResponse, error)
 	// Queries a SystemInfo by index.
 	SystemInfo(ctx context.Context, in *QueryGetSystemInfoRequest, opts ...grpc.CallOption) (*QueryGetSystemInfoResponse, error)
+	// Queries a list of StoredVoting items.
+	StoredVoting(ctx context.Context, in *QueryGetStoredVotingRequest, opts ...grpc.CallOption) (*QueryGetStoredVotingResponse, error)
+	StoredVotingAll(ctx context.Context, in *QueryAllStoredVotingRequest, opts ...grpc.CallOption) (*QueryAllStoredVotingResponse, error)
 }
 
 type queryClient struct {
@@ -59,6 +64,24 @@ func (c *queryClient) SystemInfo(ctx context.Context, in *QueryGetSystemInfoRequ
 	return out, nil
 }
 
+func (c *queryClient) StoredVoting(ctx context.Context, in *QueryGetStoredVotingRequest, opts ...grpc.CallOption) (*QueryGetStoredVotingResponse, error) {
+	out := new(QueryGetStoredVotingResponse)
+	err := c.cc.Invoke(ctx, Query_StoredVoting_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queryClient) StoredVotingAll(ctx context.Context, in *QueryAllStoredVotingRequest, opts ...grpc.CallOption) (*QueryAllStoredVotingResponse, error) {
+	out := new(QueryAllStoredVotingResponse)
+	err := c.cc.Invoke(ctx, Query_StoredVotingAll_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // QueryServer is the server API for Query service.
 // All implementations must embed UnimplementedQueryServer
 // for forward compatibility
@@ -67,6 +90,9 @@ type QueryServer interface {
 	Params(context.Context, *QueryParamsRequest) (*QueryParamsResponse, error)
 	// Queries a SystemInfo by index.
 	SystemInfo(context.Context, *QueryGetSystemInfoRequest) (*QueryGetSystemInfoResponse, error)
+	// Queries a list of StoredVoting items.
+	StoredVoting(context.Context, *QueryGetStoredVotingRequest) (*QueryGetStoredVotingResponse, error)
+	StoredVotingAll(context.Context, *QueryAllStoredVotingRequest) (*QueryAllStoredVotingResponse, error)
 	mustEmbedUnimplementedQueryServer()
 }
 
@@ -79,6 +105,12 @@ func (UnimplementedQueryServer) Params(context.Context, *QueryParamsRequest) (*Q
 }
 func (UnimplementedQueryServer) SystemInfo(context.Context, *QueryGetSystemInfoRequest) (*QueryGetSystemInfoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SystemInfo not implemented")
+}
+func (UnimplementedQueryServer) StoredVoting(context.Context, *QueryGetStoredVotingRequest) (*QueryGetStoredVotingResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method StoredVoting not implemented")
+}
+func (UnimplementedQueryServer) StoredVotingAll(context.Context, *QueryAllStoredVotingRequest) (*QueryAllStoredVotingResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method StoredVotingAll not implemented")
 }
 func (UnimplementedQueryServer) mustEmbedUnimplementedQueryServer() {}
 
@@ -129,6 +161,42 @@ func _Query_SystemInfo_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Query_StoredVoting_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryGetStoredVotingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).StoredVoting(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Query_StoredVoting_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).StoredVoting(ctx, req.(*QueryGetStoredVotingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_StoredVotingAll_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryAllStoredVotingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).StoredVotingAll(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Query_StoredVotingAll_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).StoredVotingAll(ctx, req.(*QueryAllStoredVotingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Query_ServiceDesc is the grpc.ServiceDesc for Query service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -143,6 +211,14 @@ var Query_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SystemInfo",
 			Handler:    _Query_SystemInfo_Handler,
+		},
+		{
+			MethodName: "StoredVoting",
+			Handler:    _Query_StoredVoting_Handler,
+		},
+		{
+			MethodName: "StoredVotingAll",
+			Handler:    _Query_StoredVotingAll_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

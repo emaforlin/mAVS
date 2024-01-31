@@ -8,6 +8,7 @@ import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "mavs/mavs/params.proto";
 import "mavs/mavs/system_info.proto";
+import "mavs/mavs/stored_voting.proto";
 
 option go_package = "github.com/emaforlin/mAVS/x/mavs/types";
 
@@ -25,6 +26,16 @@ service Query {
     option (google.api.http).get = "/emaforlin/mAVS/mavs/system_info";
   
   }
+  
+  // Queries a list of StoredVoting items.
+  rpc StoredVoting    (QueryGetStoredVotingRequest) returns (QueryGetStoredVotingResponse) {
+    option (google.api.http).get = "/emaforlin/mAVS/mavs/stored_voting/{index}";
+  
+  }
+  rpc StoredVotingAll (QueryAllStoredVotingRequest) returns (QueryAllStoredVotingResponse) {
+    option (google.api.http).get = "/emaforlin/mAVS/mavs/stored_voting";
+  
+  }
 }
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
@@ -40,5 +51,22 @@ message QueryGetSystemInfoRequest {}
 
 message QueryGetSystemInfoResponse {
   SystemInfo SystemInfo = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryGetStoredVotingRequest {
+  string index = 1;
+}
+
+message QueryGetStoredVotingResponse {
+  StoredVoting storedVoting = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllStoredVotingRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllStoredVotingResponse {
+  repeated StoredVoting                           storedVoting = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination   = 2;
 }
 
