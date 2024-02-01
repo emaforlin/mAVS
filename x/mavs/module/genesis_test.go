@@ -5,7 +5,7 @@ import (
 
 	keepertest "github.com/emaforlin/mAVS/testutil/keeper"
 	"github.com/emaforlin/mAVS/testutil/nullify"
-	"github.com/emaforlin/mAVS/x/mavs/module"
+	mavs "github.com/emaforlin/mAVS/x/mavs/module"
 	"github.com/emaforlin/mAVS/x/mavs/types"
 	"github.com/stretchr/testify/require"
 )
@@ -14,7 +14,7 @@ func TestGenesis(t *testing.T) {
 	genesisState := types.GenesisState{
 		Params: types.DefaultParams(),
 
-		SystemInfo: &types.SystemInfo{
+		SystemInfo: types.SystemInfo{
 			NextId: 58,
 		},
 		StoredVotingList: []types.StoredVoting{
