@@ -27,13 +27,14 @@ func (t VotingTime) active() bool {
 }
 
 type Voting struct {
+	Title      string
 	TimeWindow VotingTime
 	Roll       *ElectoralRoll
 	Candidates []Party
 	VoteCount  map[Party]uint64
 }
 
-func NewVoting(startAt time.Time, endAt time.Time, roll *ElectoralRoll, parties ...Party) *Voting {
+func NewVoting(title string, startAt time.Time, endAt time.Time, roll *ElectoralRoll, parties ...Party) *Voting {
 	timeWindow := VotingTime{startAt, endAt}
 	if timeWindow.End.Sub(timeWindow.Start) <= 0 {
 		return nil
@@ -42,9 +43,14 @@ func NewVoting(startAt time.Time, endAt time.Time, roll *ElectoralRoll, parties 
 		return nil
 	}
 
+	if title == "" {
+		return nil
+	}
+
 	parties = append(parties, BlankVote)
 
 	return &Voting{
+		Title:      title,
 		TimeWindow: timeWindow,
 		Roll:       roll,
 		Candidates: parties,
