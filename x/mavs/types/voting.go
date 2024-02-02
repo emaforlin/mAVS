@@ -7,7 +7,20 @@ import (
 )
 
 func (s StoredVoting) CountVotes() (votes uint64) {
-	return s.Votes
+	var voteCount uint64
+	for _, v := range s.Counting {
+		voteCount += v
+	}
+	return uint64(voteCount)
+}
+
+func (s StoredVoting) GetVotesFrom(partyName string) (res uint64, err error) {
+	res, found := s.Counting[partyName]
+	if !found {
+		err = ErrCandidateNotFound
+		return
+	}
+	return
 }
 
 func (s StoredVoting) StillActive() (err error) {
@@ -45,9 +58,6 @@ func (s StoredVoting) StillActive() (err error) {
 func (s StoredVoting) Validate() (err error) {
 	if s.Index == "" {
 		return ErrBadStoredVoting
-	}
-	if s.Title == "" {
-		return ErrInvalidVotingTitle
 	}
 
 	return nil
