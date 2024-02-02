@@ -19205,6 +19205,62 @@ paths:
               parameters.
       tags:
         - Msg
+  /mavs.mavs.Msg/UpdateParams:
+    post:
+      summary: |-
+        UpdateParams defines a (governance) operation for updating the module
+        parameters. The authority defaults to the x/gov module account.
+      operationId: MavsMavsMsg_UpdateParams
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            description: >-
+              MsgUpdateParamsResponse defines the response structure for
+              executing a
+
+              MsgUpdateParams message.
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: body
+          description: MsgUpdateParams is the Msg/UpdateParams request type.
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              authority:
+                type: string
+                description: >-
+                  authority is the address that controls the module (defaults to
+                  x/gov unless overwritten).
+              params:
+                description: |-
+                  params defines the module parameters to update.
+
+                  NOTE: All parameters must be supplied.
+                type: object
+            description: MsgUpdateParams is the Msg/UpdateParams request type.
+      tags:
+        - Msg
   /emaforlin/mAVS/mavs/params:
     get:
       summary: Parameters queries the parameters of the module.
@@ -19262,6 +19318,8 @@ paths:
                     votes:
                       type: string
                       format: uint64
+                    timewindow:
+                      type: string
               pagination:
                 type: object
                 properties:
@@ -19387,6 +19445,8 @@ paths:
                   votes:
                     type: string
                     format: uint64
+                  timewindow:
+                    type: string
         default:
           description: An unexpected error response.
           schema:
@@ -19448,62 +19508,6 @@ paths:
                   additionalProperties: {}
       tags:
         - Query
-  /mavs.mavs.Msg/UpdateParams:
-    post:
-      summary: |-
-        UpdateParams defines a (governance) operation for updating the module
-        parameters. The authority defaults to the x/gov module account.
-      operationId: MavsMavsMsg_UpdateParams
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-            description: >-
-              MsgUpdateParamsResponse defines the response structure for
-              executing a
-
-              MsgUpdateParams message.
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                  additionalProperties: {}
-      parameters:
-        - name: body
-          description: MsgUpdateParams is the Msg/UpdateParams request type.
-          in: body
-          required: true
-          schema:
-            type: object
-            properties:
-              authority:
-                type: string
-                description: >-
-                  authority is the address that controls the module (defaults to
-                  x/gov unless overwritten).
-              params:
-                description: |-
-                  params defines the module parameters to update.
-
-                  NOTE: All parameters must be supplied.
-                type: object
-            description: MsgUpdateParams is the Msg/UpdateParams request type.
-      tags:
-        - Msg
 definitions:
   cosmos.auth.v1beta1.MsgUpdateParams:
     type: object
@@ -27221,6 +27225,29 @@ definitions:
     description: |-
       Version defines the versioning scheme used to negotiate the IBC verison in
       the connection handshake.
+  mavs.mavs.MsgUpdateParams:
+    type: object
+    properties:
+      authority:
+        type: string
+        description: >-
+          authority is the address that controls the module (defaults to x/gov
+          unless overwritten).
+      params:
+        description: |-
+          params defines the module parameters to update.
+
+          NOTE: All parameters must be supplied.
+        type: object
+    description: MsgUpdateParams is the Msg/UpdateParams request type.
+  mavs.mavs.MsgUpdateParamsResponse:
+    type: object
+    description: |-
+      MsgUpdateParamsResponse defines the response structure for executing a
+      MsgUpdateParams message.
+  mavs.mavs.Params:
+    type: object
+    description: Params defines the parameters for the module.
   cosmos.base.query.v1beta1.PageRequest:
     type: object
     properties:
@@ -27298,9 +27325,6 @@ definitions:
                repeated Bar results = 1;
                PageResponse page = 2;
        }
-  mavs.mavs.Params:
-    type: object
-    description: Params defines the parameters for the module.
   mavs.mavs.QueryAllStoredVotingResponse:
     type: object
     properties:
@@ -27316,6 +27340,8 @@ definitions:
             votes:
               type: string
               format: uint64
+            timewindow:
+              type: string
       pagination:
         type: object
         properties:
@@ -27355,6 +27381,8 @@ definitions:
           votes:
             type: string
             format: uint64
+          timewindow:
+            type: string
   mavs.mavs.QueryGetSystemInfoResponse:
     type: object
     properties:
@@ -27381,29 +27409,11 @@ definitions:
       votes:
         type: string
         format: uint64
+      timewindow:
+        type: string
   mavs.mavs.SystemInfo:
     type: object
     properties:
       nextId:
         type: string
         format: uint64
-  mavs.mavs.MsgUpdateParams:
-    type: object
-    properties:
-      authority:
-        type: string
-        description: >-
-          authority is the address that controls the module (defaults to x/gov
-          unless overwritten).
-      params:
-        description: |-
-          params defines the module parameters to update.
-
-          NOTE: All parameters must be supplied.
-        type: object
-    description: MsgUpdateParams is the Msg/UpdateParams request type.
-  mavs.mavs.MsgUpdateParamsResponse:
-    type: object
-    description: |-
-      MsgUpdateParamsResponse defines the response structure for executing a
-      MsgUpdateParams message.
