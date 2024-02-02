@@ -8,6 +8,10 @@ import (
 
 // x/mavs module sentinel errors
 var (
-	ErrInvalidSigner = sdkerrors.Register(ModuleName, 1100, "expected gov account as only signer for proposal message")
-	ErrSample        = sdkerrors.Register(ModuleName, 1101, "sample error")
+	ErrInvalidSigner      = sdkerrors.Register(ModuleName, 1100, "expected gov account as only signer for proposal message")
+	ErrSample             = sdkerrors.Register(ModuleName, 1101, "sample error")
+	ErrVotationEnded      = sdkerrors.Register(ModuleName, 1102, "time window for voting has ended")
+	ErrInvalidVotingTitle = sdkerrors.Register(ModuleName, 1103, "the voting title is invalid or empty")
+	ErrBadStoredVoting    = sdkerrors.Register(ModuleName, 1104, "error when voting was stored")
+	ErrVotingTimeTooShort = sdkerrors.Register(ModuleName, 1105, "minimum voting is one(1) hour")
 )
