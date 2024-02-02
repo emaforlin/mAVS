@@ -1,6 +1,7 @@
 package directives
 
 import (
+	"fmt"
 	"time"
 )
 
@@ -32,6 +33,10 @@ type Voting struct {
 	Roll       *ElectoralRoll
 	Candidates []Party
 	VoteCount  map[Party]uint64
+}
+
+func ConvertTimeToString(t time.Time) string {
+	return fmt.Sprintf("%d%d%d%d%d%d", t.Year(), t.Month(), t.Day(), t.Hour(), t.Minute(), t.Second())
 }
 
 func NewVoting(title string, startAt time.Time, endAt time.Time, roll *ElectoralRoll, parties ...Party) *Voting {
