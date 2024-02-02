@@ -64,3 +64,12 @@ func TestGenesisState_Validate(t *testing.T) {
 		})
 	}
 }
+
+func TestDefaultGenesisState_ExpectedInitialNextId(t *testing.T) {
+	require.EqualValues(t,
+		&types.GenesisState{
+			StoredVotingList: []types.StoredVoting{},
+			SystemInfo:       types.SystemInfo{uint64(1)},
+		},
+		types.DefaultGenesis())
+}
