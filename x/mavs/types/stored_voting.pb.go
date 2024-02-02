@@ -23,10 +23,9 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
 type StoredVoting struct {
-	Index      string `protobuf:"bytes,1,opt,name=index,proto3" json:"index,omitempty"`
-	Title      string `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
-	Votes      uint64 `protobuf:"varint,3,opt,name=votes,proto3" json:"votes,omitempty"`
-	Timewindow string `protobuf:"bytes,4,opt,name=timewindow,proto3" json:"timewindow,omitempty"`
+	Index      string            `protobuf:"bytes,1,opt,name=index,proto3" json:"index,omitempty"`
+	Timewindow string            `protobuf:"bytes,2,opt,name=timewindow,proto3" json:"timewindow,omitempty"`
+	Counting   map[string]uint64 `protobuf:"bytes,3,rep,name=counting,proto3" json:"counting,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
 }
 
 func (m *StoredVoting) Reset()         { *m = StoredVoting{} }
@@ -69,20 +68,6 @@ func (m *StoredVoting) GetIndex() string {
 	return ""
 }
 
-func (m *StoredVoting) GetTitle() string {
-	if m != nil {
-		return m.Title
-	}
-	return ""
-}
-
-func (m *StoredVoting) GetVotes() uint64 {
-	if m != nil {
-		return m.Votes
-	}
-	return 0
-}
-
 func (m *StoredVoting) GetTimewindow() string {
 	if m != nil {
 		return m.Timewindow
@@ -90,27 +75,38 @@ func (m *StoredVoting) GetTimewindow() string {
 	return ""
 }
 
+func (m *StoredVoting) GetCounting() map[string]uint64 {
+	if m != nil {
+		return m.Counting
+	}
+	return nil
+}
+
 func init() {
 	proto.RegisterType((*StoredVoting)(nil), "mavs.mavs.StoredVoting")
+	proto.RegisterMapType((map[string]uint64)(nil), "mavs.mavs.StoredVoting.CountingEntry")
 }
 
 func init() { proto.RegisterFile("mavs/mavs/stored_voting.proto", fileDescriptor_162f2f61ca5a0076) }
 
 var fileDescriptor_162f2f61ca5a0076 = []byte{
-	// 203 bytes of a gzipped FileDescriptorProto
+	// 247 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x92, 0xcd, 0x4d, 0x2c, 0x2b,
 	0xd6, 0x07, 0x13, 0xc5, 0x25, 0xf9, 0x45, 0xa9, 0x29, 0xf1, 0x65, 0xf9, 0x25, 0x99, 0x79, 0xe9,
-	0x7a, 0x05, 0x45, 0xf9, 0x25, 0xf9, 0x42, 0x9c, 0x20, 0x19, 0x3d, 0x10, 0xa1, 0x54, 0xc0, 0xc5,
-	0x13, 0x0c, 0x56, 0x11, 0x06, 0x56, 0x20, 0x24, 0xc2, 0xc5, 0x9a, 0x99, 0x97, 0x92, 0x5a, 0x21,
-	0xc1, 0xa8, 0xc0, 0xa8, 0xc1, 0x19, 0x04, 0xe1, 0x80, 0x44, 0x4b, 0x32, 0x4b, 0x72, 0x52, 0x25,
-	0x98, 0x20, 0xa2, 0x60, 0x0e, 0x48, 0xb4, 0x2c, 0xbf, 0x24, 0xb5, 0x58, 0x82, 0x59, 0x81, 0x51,
-	0x83, 0x25, 0x08, 0xc2, 0x11, 0x92, 0xe3, 0xe2, 0x2a, 0xc9, 0xcc, 0x4d, 0x2d, 0xcf, 0xcc, 0x4b,
-	0xc9, 0x2f, 0x97, 0x60, 0x01, 0x6b, 0x40, 0x12, 0x71, 0x72, 0x38, 0xf1, 0x48, 0x8e, 0xf1, 0xc2,
-	0x23, 0x39, 0xc6, 0x07, 0x8f, 0xe4, 0x18, 0x27, 0x3c, 0x96, 0x63, 0xb8, 0xf0, 0x58, 0x8e, 0xe1,
-	0xc6, 0x63, 0x39, 0x86, 0x28, 0xb5, 0xf4, 0xcc, 0x92, 0x8c, 0xd2, 0x24, 0xbd, 0xe4, 0xfc, 0x5c,
-	0xfd, 0xd4, 0xdc, 0xc4, 0xb4, 0xfc, 0xa2, 0x9c, 0xcc, 0x3c, 0xfd, 0x5c, 0xc7, 0xb0, 0x60, 0xfd,
-	0x0a, 0x88, 0x67, 0x4a, 0x2a, 0x0b, 0x52, 0x8b, 0x93, 0xd8, 0xc0, 0xbe, 0x30, 0x06, 0x04, 0x00,
-	0x00, 0xff, 0xff, 0x50, 0x03, 0x9b, 0xeb, 0xe6, 0x00, 0x00, 0x00,
+	0x7a, 0x05, 0x45, 0xf9, 0x25, 0xf9, 0x42, 0x9c, 0x20, 0x19, 0x3d, 0x10, 0xa1, 0x74, 0x84, 0x91,
+	0x8b, 0x27, 0x18, 0xac, 0x24, 0x0c, 0xac, 0x42, 0x48, 0x84, 0x8b, 0x35, 0x33, 0x2f, 0x25, 0xb5,
+	0x42, 0x82, 0x51, 0x81, 0x51, 0x83, 0x33, 0x08, 0xc2, 0x11, 0x92, 0xe3, 0xe2, 0x2a, 0xc9, 0xcc,
+	0x4d, 0x2d, 0xcf, 0xcc, 0x4b, 0xc9, 0x2f, 0x97, 0x60, 0x02, 0x4b, 0x21, 0x89, 0x08, 0x39, 0x72,
+	0x71, 0x24, 0xe7, 0x97, 0xe6, 0x81, 0x4c, 0x90, 0x60, 0x56, 0x60, 0xd6, 0xe0, 0x36, 0x52, 0xd5,
+	0x83, 0x5b, 0xa2, 0x87, 0x6c, 0x81, 0x9e, 0x33, 0x54, 0x9d, 0x6b, 0x5e, 0x49, 0x51, 0x65, 0x10,
+	0x5c, 0x9b, 0x94, 0x35, 0x17, 0x2f, 0x8a, 0x94, 0x90, 0x00, 0x17, 0x73, 0x76, 0x6a, 0x25, 0xd4,
+	0x1d, 0x20, 0x26, 0xc8, 0x6d, 0x65, 0x89, 0x39, 0xa5, 0xa9, 0x60, 0x07, 0xb0, 0x04, 0x41, 0x38,
+	0x56, 0x4c, 0x16, 0x8c, 0x4e, 0x0e, 0x27, 0x1e, 0xc9, 0x31, 0x5e, 0x78, 0x24, 0xc7, 0xf8, 0xe0,
+	0x91, 0x1c, 0xe3, 0x84, 0xc7, 0x72, 0x0c, 0x17, 0x1e, 0xcb, 0x31, 0xdc, 0x78, 0x2c, 0xc7, 0x10,
+	0xa5, 0x96, 0x9e, 0x59, 0x92, 0x51, 0x9a, 0xa4, 0x97, 0x9c, 0x9f, 0xab, 0x9f, 0x9a, 0x9b, 0x98,
+	0x96, 0x5f, 0x94, 0x93, 0x99, 0xa7, 0x9f, 0xeb, 0x18, 0x16, 0xac, 0x5f, 0x01, 0x09, 0xa1, 0x92,
+	0xca, 0x82, 0xd4, 0xe2, 0x24, 0x36, 0x70, 0xd0, 0x18, 0x03, 0x02, 0x00, 0x00, 0xff, 0xff, 0xfe,
+	0x29, 0xe2, 0xb3, 0x3b, 0x01, 0x00, 0x00,
 }
 
 func (m *StoredVoting) Marshal() (dAtA []byte, err error) {
@@ -133,22 +129,27 @@ func (m *StoredVoting) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	_ = i
 	var l int
 	_ = l
+	if len(m.Counting) > 0 {
+		for k := range m.Counting {
+			v := m.Counting[k]
+			baseI := i
+			i = encodeVarintStoredVoting(dAtA, i, uint64(v))
+			i--
+			dAtA[i] = 0x10
+			i -= len(k)
+			copy(dAtA[i:], k)
+			i = encodeVarintStoredVoting(dAtA, i, uint64(len(k)))
+			i--
+			dAtA[i] = 0xa
+			i = encodeVarintStoredVoting(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0x1a
+		}
+	}
 	if len(m.Timewindow) > 0 {
 		i -= len(m.Timewindow)
 		copy(dAtA[i:], m.Timewindow)
 		i = encodeVarintStoredVoting(dAtA, i, uint64(len(m.Timewindow)))
-		i--
-		dAtA[i] = 0x22
-	}
-	if m.Votes != 0 {
-		i = encodeVarintStoredVoting(dAtA, i, uint64(m.Votes))
-		i--
-		dAtA[i] = 0x18
-	}
-	if len(m.Title) > 0 {
-		i -= len(m.Title)
-		copy(dAtA[i:], m.Title)
-		i = encodeVarintStoredVoting(dAtA, i, uint64(len(m.Title)))
 		i--
 		dAtA[i] = 0x12
 	}
@@ -183,16 +184,17 @@ func (m *StoredVoting) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovStoredVoting(uint64(l))
 	}
-	l = len(m.Title)
-	if l > 0 {
-		n += 1 + l + sovStoredVoting(uint64(l))
-	}
-	if m.Votes != 0 {
-		n += 1 + sovStoredVoting(uint64(m.Votes))
-	}
 	l = len(m.Timewindow)
 	if l > 0 {
 		n += 1 + l + sovStoredVoting(uint64(l))
+	}
+	if len(m.Counting) > 0 {
+		for k, v := range m.Counting {
+			_ = k
+			_ = v
+			mapEntrySize := 1 + len(k) + sovStoredVoting(uint64(len(k))) + 1 + sovStoredVoting(uint64(v))
+			n += mapEntrySize + 1 + sovStoredVoting(uint64(mapEntrySize))
+		}
 	}
 	return n
 }
@@ -266,57 +268,6 @@ func (m *StoredVoting) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Title", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowStoredVoting
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthStoredVoting
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthStoredVoting
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Title = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 3:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Votes", wireType)
-			}
-			m.Votes = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowStoredVoting
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Votes |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 4:
-			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Timewindow", wireType)
 			}
 			var stringLen uint64
@@ -346,6 +297,119 @@ func (m *StoredVoting) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.Timewindow = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Counting", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowStoredVoting
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthStoredVoting
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthStoredVoting
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Counting == nil {
+				m.Counting = make(map[string]uint64)
+			}
+			var mapkey string
+			var mapvalue uint64
+			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
+				var wire uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowStoredVoting
+					}
+					if iNdEx >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					wire |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				fieldNum := int32(wire >> 3)
+				if fieldNum == 1 {
+					var stringLenmapkey uint64
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowStoredVoting
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						stringLenmapkey |= uint64(b&0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					intStringLenmapkey := int(stringLenmapkey)
+					if intStringLenmapkey < 0 {
+						return ErrInvalidLengthStoredVoting
+					}
+					postStringIndexmapkey := iNdEx + intStringLenmapkey
+					if postStringIndexmapkey < 0 {
+						return ErrInvalidLengthStoredVoting
+					}
+					if postStringIndexmapkey > l {
+						return io.ErrUnexpectedEOF
+					}
+					mapkey = string(dAtA[iNdEx:postStringIndexmapkey])
+					iNdEx = postStringIndexmapkey
+				} else if fieldNum == 2 {
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowStoredVoting
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						mapvalue |= uint64(b&0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipStoredVoting(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if (skippy < 0) || (iNdEx+skippy) < 0 {
+						return ErrInvalidLengthStoredVoting
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
+				}
+			}
+			m.Counting[mapkey] = mapvalue
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex

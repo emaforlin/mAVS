@@ -5,9 +5,8 @@ option go_package = "github.com/emaforlin/mAVS/x/mavs/types";
 
 message StoredVoting {
   string index = 1; 
-  string title = 2; 
-  uint64 votes = 3;
-  string timewindow = 4;
+  string timewindow = 2;
+  map<string, uint64> counting = 3;
   
 }
 
