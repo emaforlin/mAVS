@@ -2,6 +2,7 @@ package directives
 
 import (
 	"fmt"
+	"strings"
 	"time"
 )
 
@@ -12,53 +13,84 @@ type Voter struct {
 	HasVoted bool
 }
 
-type ElectoralRoll []Voter
-
 type Party string
 
-var BlankVote = Party("blank")
+type ElectoralRoll []Voter
 
-type VotingTime struct {
-	Start time.Time
-	End   time.Time
-}
+var BlankVote = "blank"
 
-func (t VotingTime) active() bool {
-	return t.End.Sub(t.Start) > time.Duration(0)
+type VotingTimeImpl struct {
+	votingStart    time.Time
+	votingEnd      time.Time
+	votingDuration time.Duration
 }
 
 type VotingImpl struct {
 	Title      string
-	TimeWindow VotingTime
-	VoteCount  map[Party]uint64
+	TimeWindow VotingTimeImpl
+	VoteCount  map[string]uint64
 }
 
-func ConvertTimeToString(t time.Time) string {
-	return fmt.Sprintf("%d%d%d%d%d%d", t.Year(), t.Month(), t.Day(), t.Hour(), t.Minute(), t.Second())
+func (v VotingImpl) StartTime() *time.Time {
+	return v.TimeWindow.Start()
 }
 
-func NewVoting(title string, startAt time.Time, endAt time.Time, roll *ElectoralRoll, parties ...Party) *VotingImpl {
-	timeWindow := VotingTime{startAt, endAt}
-	if timeWindow.End.Sub(timeWindow.Start) <= 0 {
-		return nil
-	}
-	if len(parties) == 0 {
-		return nil
-	}
+func (v VotingImpl) EndTime() *time.Time {
+	return v.TimeWindow.End()
+}
 
-	if title == "" {
-		return nil
-	}
-	emptyVotes := make(map[Party]uint64)
-	emptyVotes[Party("blank")] = 0
+func (v VotingTimeImpl) String() string {
+	s := v.votingStart
+	return fmt.Sprintf("%d%d%d%d%d%d+%d", s.Year(), s.Month(), s.Day(), s.Hour(), s.Minute(), s.Day(), v.votingDuration)
+}
 
+func (v VotingTimeImpl) Start() *time.Time {
+	return &v.votingStart
+}
+
+func (v VotingTimeImpl) End() *time.Time {
+	return &v.votingEnd
+}
+
+func VotingTimeFromString(s string) VotingTimeImpl {
+	timeStrings := make([]string, 2)
+	for i, t := range strings.Split(s, " ") {
+		timeStrings[i] = fmt.Sprintf("%s-%s-%s %s:%s:%s", t[:4], t[4:6], t[6:8], t[8:10], t[10:12], t[12:14])
+	}
+	start, _ := time.Parse(time.DateTime, timeStrings[0])
+	end, _ := time.Parse(time.DateTime, timeStrings[1])
+
+	return VotingTimeImpl{
+		votingStart:    start.UTC(),
+		votingEnd:      end.UTC(),
+		votingDuration: end.Sub(start),
+	}
+}
+
+func NewVoting(title string, timeWindow VotingTimeImpl, roll *ElectoralRoll, parties ...Party) *VotingImpl {
+	partyList := make(map[string]uint64, len(parties))
+	partyList["blank"] = 0
+
+	for _, partyName := range parties {
+		partyList[string(partyName)] = 0
+	}
 	return &VotingImpl{
 		Title:      title,
 		TimeWindow: timeWindow,
-		VoteCount:  emptyVotes,
+		VoteCount:  partyList,
 	}
 }
 
-func (v VotingImpl) IsActive() bool {
-	return v.TimeWindow.active()
+func Parse(title string, tw string, vc *map[string]uint64) *VotingImpl {
+	res := &VotingImpl{}
+	res.Title = title
+	res.TimeWindow = VotingTimeFromString(tw)
+	res.VoteCount = *vc
+	return res
+}
+
+func (v VotingImpl) StillActive() bool {
+	now := time.Now()
+	end := v.EndTime()
+	return !end.Before(now)
 }
