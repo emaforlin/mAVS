@@ -25,6 +25,14 @@ type VotingTimeImpl struct {
 	votingDuration time.Duration
 }
 
+func NewVotingTime(start, end time.Time) VotingTimeImpl {
+	return VotingTimeImpl{
+		votingStart:    start.UTC(),
+		votingEnd:      end.UTC(),
+		votingDuration: end.Sub(start),
+	}
+}
+
 type VotingImpl struct {
 	Title      string
 	TimeWindow VotingTimeImpl
@@ -41,7 +49,10 @@ func (v VotingImpl) EndTime() *time.Time {
 
 func (v VotingTimeImpl) String() string {
 	s := v.votingStart
-	return fmt.Sprintf("%d%d%d%d%d%d+%d", s.Year(), s.Month(), s.Day(), s.Hour(), s.Minute(), s.Day(), v.votingDuration)
+	e := v.votingEnd
+	sStr := fmt.Sprintf("%d.%d.%d.%d.%d.%d", s.Year(), s.Month(), s.Day(), s.Hour(), s.Minute(), s.Second())
+	eStr := fmt.Sprintf("%d.%d.%d.%d.%d.%d", e.Year(), e.Month(), e.Day(), e.Hour(), e.Minute(), e.Second())
+	return fmt.Sprintf("%s %s", sStr, eStr)
 }
 
 func (v VotingTimeImpl) Start() *time.Time {
@@ -52,22 +63,37 @@ func (v VotingTimeImpl) End() *time.Time {
 	return &v.votingEnd
 }
 
-func VotingTimeFromString(s string) VotingTimeImpl {
-	timeStrings := make([]string, 2)
-	for i, t := range strings.Split(s, " ") {
-		timeStrings[i] = fmt.Sprintf("%s-%s-%s %s:%s:%s", t[:4], t[4:6], t[6:8], t[8:10], t[10:12], t[12:14])
-	}
-	start, _ := time.Parse(time.DateTime, timeStrings[0])
-	end, _ := time.Parse(time.DateTime, timeStrings[1])
-
-	return VotingTimeImpl{
-		votingStart:    start.UTC(),
-		votingEnd:      end.UTC(),
-		votingDuration: end.Sub(start),
-	}
+func (v VotingTimeImpl) StillActive() bool {
+	now := time.Now().UTC()
+	end := v.End().UTC()
+	return !end.Before(now)
 }
 
-func NewVoting(title string, timeWindow VotingTimeImpl, roll *ElectoralRoll, parties ...Party) *VotingImpl {
+func VotingTimeFromString(s string) VotingTimeImpl {
+	//time format <year>.<month>.<day>.<hour>.<minute>.<seconds>
+	tz := make([]string, 2)
+	for i, t := range strings.Split(s, " ") {
+		tp := strings.Split(t, ".")
+		for k, l := range tp {
+			if len(l) == 1 {
+				tp[k] = fmt.Sprintf("0%s", l)
+			}
+		}
+		tz[i] = fmt.Sprintf("%s-%s-%s %s:%s:%s", tp[0], tp[1], tp[2], tp[3], tp[4], tp[5])
+	}
+	start, err := time.Parse(time.DateTime, tz[0])
+	if err != nil {
+		fmt.Println(err)
+	}
+	end, err := time.Parse(time.DateTime, tz[1])
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	return NewVotingTime(start, end)
+}
+
+func NewVoting(title string, timeWindow VotingTimeImpl, roll *ElectoralRoll, parties ...string) *VotingImpl {
 	partyList := make(map[string]uint64, len(parties))
 	partyList["blank"] = 0
 
@@ -90,7 +116,7 @@ func Parse(title string, tw string, vc *map[string]uint64) *VotingImpl {
 }
 
 func (v VotingImpl) StillActive() bool {
-	now := time.Now()
+	now := time.Now().UTC()
 	end := v.EndTime()
 	return !end.Before(now)
 }
