@@ -17,7 +17,7 @@ func setupMsgServer(t testing.TB) (keeper.Keeper, types.MsgServer, context.Conte
 }
 
 func TestMsgServer(t *testing.T) {
-	k, ms, ctx := setupMsgServer(t)
+	k, ms, ctx := setupMsgServerCreateVoting(t)
 	require.NotNil(t, ms)
 	require.NotNil(t, ctx)
 	require.NotEmpty(t, k)
