@@ -27,8 +27,8 @@ type VotingTimeImpl struct {
 
 func NewVotingTime(start, end time.Time) VotingTimeImpl {
 	return VotingTimeImpl{
-		votingStart:    start.UTC(),
-		votingEnd:      end.UTC(),
+		votingStart:    start,
+		votingEnd:      end,
 		votingDuration: end.Sub(start),
 	}
 }
@@ -90,7 +90,7 @@ func VotingTimeFromString(s string) VotingTimeImpl {
 		fmt.Println(err)
 	}
 
-	return NewVotingTime(start, end)
+	return NewVotingTime(start.UTC(), end.UTC())
 }
 
 func NewVoting(title string, timeWindow VotingTimeImpl, roll *ElectoralRoll, parties ...string) *VotingImpl {
@@ -116,7 +116,7 @@ func Parse(title string, tw string, vc *map[string]uint64) *VotingImpl {
 }
 
 func (v VotingImpl) StillActive() bool {
-	now := time.Now().UTC()
+	now := time.Now()
 	end := v.EndTime()
 	return !end.Before(now)
 }
