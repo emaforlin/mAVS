@@ -9,8 +9,99 @@ import (
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	io "io"
 	reflect "reflect"
+	sort "sort"
 	sync "sync"
 )
+
+var _ protoreflect.Map = (*_ElectoralRoll_1_map)(nil)
+
+type _ElectoralRoll_1_map struct {
+	m *map[uint64]*Voter
+}
+
+func (x *_ElectoralRoll_1_map) Len() int {
+	if x.m == nil {
+		return 0
+	}
+	return len(*x.m)
+}
+
+func (x *_ElectoralRoll_1_map) Range(f func(protoreflect.MapKey, protoreflect.Value) bool) {
+	if x.m == nil {
+		return
+	}
+	for k, v := range *x.m {
+		mapKey := (protoreflect.MapKey)(protoreflect.ValueOfUint64(k))
+		mapValue := protoreflect.ValueOfMessage(v.ProtoReflect())
+		if !f(mapKey, mapValue) {
+			break
+		}
+	}
+}
+
+func (x *_ElectoralRoll_1_map) Has(key protoreflect.MapKey) bool {
+	if x.m == nil {
+		return false
+	}
+	keyUnwrapped := key.Uint()
+	concreteValue := keyUnwrapped
+	_, ok := (*x.m)[concreteValue]
+	return ok
+}
+
+func (x *_ElectoralRoll_1_map) Clear(key protoreflect.MapKey) {
+	if x.m == nil {
+		return
+	}
+	keyUnwrapped := key.Uint()
+	concreteKey := keyUnwrapped
+	delete(*x.m, concreteKey)
+}
+
+func (x *_ElectoralRoll_1_map) Get(key protoreflect.MapKey) protoreflect.Value {
+	if x.m == nil {
+		return protoreflect.Value{}
+	}
+	keyUnwrapped := key.Uint()
+	concreteKey := keyUnwrapped
+	v, ok := (*x.m)[concreteKey]
+	if !ok {
+		return protoreflect.Value{}
+	}
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_ElectoralRoll_1_map) Set(key protoreflect.MapKey, value protoreflect.Value) {
+	if !key.IsValid() || !value.IsValid() {
+		panic("invalid key or value provided")
+	}
+	keyUnwrapped := key.Uint()
+	concreteKey := keyUnwrapped
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*Voter)
+	(*x.m)[concreteKey] = concreteValue
+}
+
+func (x *_ElectoralRoll_1_map) Mutable(key protoreflect.MapKey) protoreflect.Value {
+	keyUnwrapped := key.Uint()
+	concreteKey := keyUnwrapped
+	v, ok := (*x.m)[concreteKey]
+	if ok {
+		return protoreflect.ValueOfMessage(v.ProtoReflect())
+	}
+	newValue := new(Voter)
+	(*x.m)[concreteKey] = newValue
+	return protoreflect.ValueOfMessage(newValue.ProtoReflect())
+}
+
+func (x *_ElectoralRoll_1_map) NewValue() protoreflect.Value {
+	v := new(Voter)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_ElectoralRoll_1_map) IsValid() bool {
+	return x.m != nil
+}
 
 var (
 	md_ElectoralRoll        protoreflect.MessageDescriptor
@@ -88,8 +179,8 @@ func (x *fastReflection_ElectoralRoll) Interface() protoreflect.ProtoMessage {
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_ElectoralRoll) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
-	if x.Voters != "" {
-		value := protoreflect.ValueOfString(x.Voters)
+	if len(x.Voters) != 0 {
+		value := protoreflect.ValueOfMap(&_ElectoralRoll_1_map{m: &x.Voters})
 		if !f(fd_ElectoralRoll_voters, value) {
 			return
 		}
@@ -110,7 +201,7 @@ func (x *fastReflection_ElectoralRoll) Range(f func(protoreflect.FieldDescriptor
 func (x *fastReflection_ElectoralRoll) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
 	case "mavs.mavs.ElectoralRoll.voters":
-		return x.Voters != ""
+		return len(x.Voters) != 0
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: mavs.mavs.ElectoralRoll"))
@@ -128,7 +219,7 @@ func (x *fastReflection_ElectoralRoll) Has(fd protoreflect.FieldDescriptor) bool
 func (x *fastReflection_ElectoralRoll) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
 	case "mavs.mavs.ElectoralRoll.voters":
-		x.Voters = ""
+		x.Voters = nil
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: mavs.mavs.ElectoralRoll"))
@@ -146,8 +237,11 @@ func (x *fastReflection_ElectoralRoll) Clear(fd protoreflect.FieldDescriptor) {
 func (x *fastReflection_ElectoralRoll) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
 	case "mavs.mavs.ElectoralRoll.voters":
-		value := x.Voters
-		return protoreflect.ValueOfString(value)
+		if len(x.Voters) == 0 {
+			return protoreflect.ValueOfMap(&_ElectoralRoll_1_map{})
+		}
+		mapValue := &_ElectoralRoll_1_map{m: &x.Voters}
+		return protoreflect.ValueOfMap(mapValue)
 	default:
 		if descriptor.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: mavs.mavs.ElectoralRoll"))
@@ -169,7 +263,9 @@ func (x *fastReflection_ElectoralRoll) Get(descriptor protoreflect.FieldDescript
 func (x *fastReflection_ElectoralRoll) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
 	case "mavs.mavs.ElectoralRoll.voters":
-		x.Voters = value.Interface().(string)
+		mv := value.Map()
+		cmv := mv.(*_ElectoralRoll_1_map)
+		x.Voters = *cmv.m
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: mavs.mavs.ElectoralRoll"))
@@ -191,7 +287,11 @@ func (x *fastReflection_ElectoralRoll) Set(fd protoreflect.FieldDescriptor, valu
 func (x *fastReflection_ElectoralRoll) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
 	case "mavs.mavs.ElectoralRoll.voters":
-		panic(fmt.Errorf("field voters of message mavs.mavs.ElectoralRoll is not mutable"))
+		if x.Voters == nil {
+			x.Voters = make(map[uint64]*Voter)
+		}
+		value := &_ElectoralRoll_1_map{m: &x.Voters}
+		return protoreflect.ValueOfMap(value)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: mavs.mavs.ElectoralRoll"))
@@ -206,7 +306,8 @@ func (x *fastReflection_ElectoralRoll) Mutable(fd protoreflect.FieldDescriptor) 
 func (x *fastReflection_ElectoralRoll) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
 	case "mavs.mavs.ElectoralRoll.voters":
-		return protoreflect.ValueOfString("")
+		m := make(map[uint64]*Voter)
+		return protoreflect.ValueOfMap(&_ElectoralRoll_1_map{m: &m})
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: mavs.mavs.ElectoralRoll"))
@@ -276,9 +377,33 @@ func (x *fastReflection_ElectoralRoll) ProtoMethods() *protoiface.Methods {
 		var n int
 		var l int
 		_ = l
-		l = len(x.Voters)
-		if l > 0 {
-			n += 1 + l + runtime.Sov(uint64(l))
+		if len(x.Voters) > 0 {
+			SiZeMaP := func(k uint64, v *Voter) {
+				l := 0
+				if v != nil {
+					l = options.Size(v)
+				}
+				l += 1 + runtime.Sov(uint64(l))
+				mapEntrySize := 1 + runtime.Sov(uint64(k)) + l
+				n += mapEntrySize + 1 + runtime.Sov(uint64(mapEntrySize))
+			}
+			if options.Deterministic {
+				sortme := make([]uint64, 0, len(x.Voters))
+				for k := range x.Voters {
+					sortme = append(sortme, k)
+				}
+				sort.Slice(sortme, func(i, j int) bool {
+					return sortme[i] < sortme[j]
+				})
+				for _, k := range sortme {
+					v := x.Voters[k]
+					SiZeMaP(k, v)
+				}
+			} else {
+				for k, v := range x.Voters {
+					SiZeMaP(k, v)
+				}
+			}
 		}
 		if x.unknownFields != nil {
 			n += len(x.unknownFields)
@@ -310,11 +435,52 @@ func (x *fastReflection_ElectoralRoll) ProtoMethods() *protoiface.Methods {
 			copy(dAtA[i:], x.unknownFields)
 		}
 		if len(x.Voters) > 0 {
-			i -= len(x.Voters)
-			copy(dAtA[i:], x.Voters)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Voters)))
-			i--
-			dAtA[i] = 0xa
+			MaRsHaLmAp := func(k uint64, v *Voter) (protoiface.MarshalOutput, error) {
+				baseI := i
+				encoded, err := options.Marshal(v)
+				if err != nil {
+					return protoiface.MarshalOutput{
+						NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+						Buf:               input.Buf,
+					}, err
+				}
+				i -= len(encoded)
+				copy(dAtA[i:], encoded)
+				i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
+				i--
+				dAtA[i] = 0x12
+				i = runtime.EncodeVarint(dAtA, i, uint64(k))
+				i--
+				dAtA[i] = 0x8
+				i = runtime.EncodeVarint(dAtA, i, uint64(baseI-i))
+				i--
+				dAtA[i] = 0xa
+				return protoiface.MarshalOutput{}, nil
+			}
+			if options.Deterministic {
+				keysForVoters := make([]uint64, 0, len(x.Voters))
+				for k := range x.Voters {
+					keysForVoters = append(keysForVoters, uint64(k))
+				}
+				sort.Slice(keysForVoters, func(i, j int) bool {
+					return keysForVoters[i] < keysForVoters[j]
+				})
+				for iNdEx := len(keysForVoters) - 1; iNdEx >= 0; iNdEx-- {
+					v := x.Voters[uint64(keysForVoters[iNdEx])]
+					out, err := MaRsHaLmAp(keysForVoters[iNdEx], v)
+					if err != nil {
+						return out, err
+					}
+				}
+			} else {
+				for k := range x.Voters {
+					v := x.Voters[k]
+					out, err := MaRsHaLmAp(k, v)
+					if err != nil {
+						return out, err
+					}
+				}
+			}
 		}
 		if input.Buf != nil {
 			input.Buf = append(input.Buf, dAtA...)
@@ -369,7 +535,7 @@ func (x *fastReflection_ElectoralRoll) ProtoMethods() *protoiface.Methods {
 				if wireType != 2 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Voters", wireType)
 				}
-				var stringLen uint64
+				var msglen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -379,23 +545,106 @@ func (x *fastReflection_ElectoralRoll) ProtoMethods() *protoiface.Methods {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					stringLen |= uint64(b&0x7F) << shift
+					msglen |= int(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
 				}
-				intStringLen := int(stringLen)
-				if intStringLen < 0 {
+				if msglen < 0 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
 				}
-				postIndex := iNdEx + intStringLen
+				postIndex := iNdEx + msglen
 				if postIndex < 0 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
 				}
 				if postIndex > l {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
 				}
-				x.Voters = string(dAtA[iNdEx:postIndex])
+				if x.Voters == nil {
+					x.Voters = make(map[uint64]*Voter)
+				}
+				var mapkey uint64
+				var mapvalue *Voter
+				for iNdEx < postIndex {
+					entryPreIndex := iNdEx
+					var wire uint64
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+						}
+						if iNdEx >= l {
+							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						wire |= uint64(b&0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					fieldNum := int32(wire >> 3)
+					if fieldNum == 1 {
+						for shift := uint(0); ; shift += 7 {
+							if shift >= 64 {
+								return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+							}
+							if iNdEx >= l {
+								return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+							}
+							b := dAtA[iNdEx]
+							iNdEx++
+							mapkey |= uint64(b&0x7F) << shift
+							if b < 0x80 {
+								break
+							}
+						}
+					} else if fieldNum == 2 {
+						var mapmsglen int
+						for shift := uint(0); ; shift += 7 {
+							if shift >= 64 {
+								return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+							}
+							if iNdEx >= l {
+								return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+							}
+							b := dAtA[iNdEx]
+							iNdEx++
+							mapmsglen |= int(b&0x7F) << shift
+							if b < 0x80 {
+								break
+							}
+						}
+						if mapmsglen < 0 {
+							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+						}
+						postmsgIndex := iNdEx + mapmsglen
+						if postmsgIndex < 0 {
+							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+						}
+						if postmsgIndex > l {
+							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+						}
+						mapvalue = &Voter{}
+						if err := options.Unmarshal(dAtA[iNdEx:postmsgIndex], mapvalue); err != nil {
+							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+						}
+						iNdEx = postmsgIndex
+					} else {
+						iNdEx = entryPreIndex
+						skippy, err := runtime.Skip(dAtA[iNdEx:])
+						if err != nil {
+							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+						}
+						if (skippy < 0) || (iNdEx+skippy) < 0 {
+							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+						}
+						if (iNdEx + skippy) > postIndex {
+							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+						}
+						iNdEx += skippy
+					}
+				}
+				x.Voters[mapkey] = mapvalue
 				iNdEx = postIndex
 			default:
 				iNdEx = preIndex
@@ -450,7 +699,7 @@ type ElectoralRoll struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Voters string `protobuf:"bytes,1,opt,name=voters,proto3" json:"voters,omitempty"`
+	Voters map[uint64]*Voter `protobuf:"bytes,1,rep,name=voters,proto3" json:"voters,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 
 func (x *ElectoralRoll) Reset() {
@@ -473,11 +722,11 @@ func (*ElectoralRoll) Descriptor() ([]byte, []int) {
 	return file_mavs_mavs_electoral_roll_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *ElectoralRoll) GetVoters() string {
+func (x *ElectoralRoll) GetVoters() map[uint64]*Voter {
 	if x != nil {
 		return x.Voters
 	}
-	return ""
+	return nil
 }
 
 var File_mavs_mavs_electoral_roll_proto protoreflect.FileDescriptor
@@ -485,19 +734,27 @@ var File_mavs_mavs_electoral_roll_proto protoreflect.FileDescriptor
 var file_mavs_mavs_electoral_roll_proto_rawDesc = []byte{
 	0x0a, 0x1e, 0x6d, 0x61, 0x76, 0x73, 0x2f, 0x6d, 0x61, 0x76, 0x73, 0x2f, 0x65, 0x6c, 0x65, 0x63,
 	0x74, 0x6f, 0x72, 0x61, 0x6c, 0x5f, 0x72, 0x6f, 0x6c, 0x6c, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x12, 0x09, 0x6d, 0x61, 0x76, 0x73, 0x2e, 0x6d, 0x61, 0x76, 0x73, 0x22, 0x27, 0x0a, 0x0d, 0x45,
-	0x6c, 0x65, 0x63, 0x74, 0x6f, 0x72, 0x61, 0x6c, 0x52, 0x6f, 0x6c, 0x6c, 0x12, 0x16, 0x0a, 0x06,
-	0x76, 0x6f, 0x74, 0x65, 0x72, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x76, 0x6f,
-	0x74, 0x65, 0x72, 0x73, 0x42, 0x84, 0x01, 0x0a, 0x0d, 0x63, 0x6f, 0x6d, 0x2e, 0x6d, 0x61, 0x76,
-	0x73, 0x2e, 0x6d, 0x61, 0x76, 0x73, 0x42, 0x12, 0x45, 0x6c, 0x65, 0x63, 0x74, 0x6f, 0x72, 0x61,
-	0x6c, 0x52, 0x6f, 0x6c, 0x6c, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x1a, 0x63, 0x6f,
-	0x73, 0x6d, 0x6f, 0x73, 0x73, 0x64, 0x6b, 0x2e, 0x69, 0x6f, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x6d,
-	0x61, 0x76, 0x73, 0x2f, 0x6d, 0x61, 0x76, 0x73, 0xa2, 0x02, 0x03, 0x4d, 0x4d, 0x58, 0xaa, 0x02,
-	0x09, 0x4d, 0x61, 0x76, 0x73, 0x2e, 0x4d, 0x61, 0x76, 0x73, 0xca, 0x02, 0x09, 0x4d, 0x61, 0x76,
-	0x73, 0x5c, 0x4d, 0x61, 0x76, 0x73, 0xe2, 0x02, 0x15, 0x4d, 0x61, 0x76, 0x73, 0x5c, 0x4d, 0x61,
-	0x76, 0x73, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02,
-	0x0a, 0x4d, 0x61, 0x76, 0x73, 0x3a, 0x3a, 0x4d, 0x61, 0x76, 0x73, 0x62, 0x06, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x33,
+	0x12, 0x09, 0x6d, 0x61, 0x76, 0x73, 0x2e, 0x6d, 0x61, 0x76, 0x73, 0x1a, 0x15, 0x6d, 0x61, 0x76,
+	0x73, 0x2f, 0x6d, 0x61, 0x76, 0x73, 0x2f, 0x76, 0x6f, 0x74, 0x65, 0x72, 0x2e, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x22, 0x9a, 0x01, 0x0a, 0x0d, 0x45, 0x6c, 0x65, 0x63, 0x74, 0x6f, 0x72, 0x61, 0x6c,
+	0x52, 0x6f, 0x6c, 0x6c, 0x12, 0x3c, 0x0a, 0x06, 0x76, 0x6f, 0x74, 0x65, 0x72, 0x73, 0x18, 0x01,
+	0x20, 0x03, 0x28, 0x0b, 0x32, 0x24, 0x2e, 0x6d, 0x61, 0x76, 0x73, 0x2e, 0x6d, 0x61, 0x76, 0x73,
+	0x2e, 0x45, 0x6c, 0x65, 0x63, 0x74, 0x6f, 0x72, 0x61, 0x6c, 0x52, 0x6f, 0x6c, 0x6c, 0x2e, 0x56,
+	0x6f, 0x74, 0x65, 0x72, 0x73, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x52, 0x06, 0x76, 0x6f, 0x74, 0x65,
+	0x72, 0x73, 0x1a, 0x4b, 0x0a, 0x0b, 0x56, 0x6f, 0x74, 0x65, 0x72, 0x73, 0x45, 0x6e, 0x74, 0x72,
+	0x79, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x03,
+	0x6b, 0x65, 0x79, 0x12, 0x26, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x0b, 0x32, 0x10, 0x2e, 0x6d, 0x61, 0x76, 0x73, 0x2e, 0x6d, 0x61, 0x76, 0x73, 0x2e, 0x56,
+	0x6f, 0x74, 0x65, 0x72, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x3a, 0x02, 0x38, 0x01, 0x42,
+	0x84, 0x01, 0x0a, 0x0d, 0x63, 0x6f, 0x6d, 0x2e, 0x6d, 0x61, 0x76, 0x73, 0x2e, 0x6d, 0x61, 0x76,
+	0x73, 0x42, 0x12, 0x45, 0x6c, 0x65, 0x63, 0x74, 0x6f, 0x72, 0x61, 0x6c, 0x52, 0x6f, 0x6c, 0x6c,
+	0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x1a, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x73,
+	0x64, 0x6b, 0x2e, 0x69, 0x6f, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x6d, 0x61, 0x76, 0x73, 0x2f, 0x6d,
+	0x61, 0x76, 0x73, 0xa2, 0x02, 0x03, 0x4d, 0x4d, 0x58, 0xaa, 0x02, 0x09, 0x4d, 0x61, 0x76, 0x73,
+	0x2e, 0x4d, 0x61, 0x76, 0x73, 0xca, 0x02, 0x09, 0x4d, 0x61, 0x76, 0x73, 0x5c, 0x4d, 0x61, 0x76,
+	0x73, 0xe2, 0x02, 0x15, 0x4d, 0x61, 0x76, 0x73, 0x5c, 0x4d, 0x61, 0x76, 0x73, 0x5c, 0x47, 0x50,
+	0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x0a, 0x4d, 0x61, 0x76, 0x73,
+	0x3a, 0x3a, 0x4d, 0x61, 0x76, 0x73, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -512,16 +769,20 @@ func file_mavs_mavs_electoral_roll_proto_rawDescGZIP() []byte {
 	return file_mavs_mavs_electoral_roll_proto_rawDescData
 }
 
-var file_mavs_mavs_electoral_roll_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_mavs_mavs_electoral_roll_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_mavs_mavs_electoral_roll_proto_goTypes = []interface{}{
 	(*ElectoralRoll)(nil), // 0: mavs.mavs.ElectoralRoll
+	nil,                   // 1: mavs.mavs.ElectoralRoll.VotersEntry
+	(*Voter)(nil),         // 2: mavs.mavs.Voter
 }
 var file_mavs_mavs_electoral_roll_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	1, // 0: mavs.mavs.ElectoralRoll.voters:type_name -> mavs.mavs.ElectoralRoll.VotersEntry
+	2, // 1: mavs.mavs.ElectoralRoll.VotersEntry.value:type_name -> mavs.mavs.Voter
+	2, // [2:2] is the sub-list for method output_type
+	2, // [2:2] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_mavs_mavs_electoral_roll_proto_init() }
@@ -529,6 +790,7 @@ func file_mavs_mavs_electoral_roll_proto_init() {
 	if File_mavs_mavs_electoral_roll_proto != nil {
 		return
 	}
+	file_mavs_mavs_voter_proto_init()
 	if !protoimpl.UnsafeEnabled {
 		file_mavs_mavs_electoral_roll_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ElectoralRoll); i {
@@ -549,7 +811,7 @@ func file_mavs_mavs_electoral_roll_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_mavs_mavs_electoral_roll_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   1,
+			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

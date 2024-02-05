@@ -1,11 +1,10 @@
 syntax = "proto3";
 package mavs.mavs;
 
-import "mavs/mavs/voter.proto";
-
 option go_package = "github.com/emaforlin/mAVS/x/mavs/types";
 
-message ElectoralRoll {
+message Voter {
   
-  map<uint64,Voter> voters = 1; 
+  string proofId = 1; 
+  bool hasVoted = 2; 
 }
