@@ -1,13 +1,17 @@
 syntax = "proto3";
 package mavs.mavs;
 
+import "mavs/mavs/electoral_roll.proto";
 option go_package = "github.com/emaforlin/mAVS/x/mavs/types";
+
 
 message StoredVoting {
   string index = 1; 
   string timewindow = 2;
   map<string, uint64> counting = 3;
   string title = 4;
+  ElectoralRoll electoral_roll = 5;
+
   
 }
 

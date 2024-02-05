@@ -96,11 +96,12 @@ func (x *_StoredVoting_3_map) IsValid() bool {
 }
 
 var (
-	md_StoredVoting            protoreflect.MessageDescriptor
-	fd_StoredVoting_index      protoreflect.FieldDescriptor
-	fd_StoredVoting_timewindow protoreflect.FieldDescriptor
-	fd_StoredVoting_counting   protoreflect.FieldDescriptor
-	fd_StoredVoting_title      protoreflect.FieldDescriptor
+	md_StoredVoting                protoreflect.MessageDescriptor
+	fd_StoredVoting_index          protoreflect.FieldDescriptor
+	fd_StoredVoting_timewindow     protoreflect.FieldDescriptor
+	fd_StoredVoting_counting       protoreflect.FieldDescriptor
+	fd_StoredVoting_title          protoreflect.FieldDescriptor
+	fd_StoredVoting_electoral_roll protoreflect.FieldDescriptor
 )
 
 func init() {
@@ -110,6 +111,7 @@ func init() {
 	fd_StoredVoting_timewindow = md_StoredVoting.Fields().ByName("timewindow")
 	fd_StoredVoting_counting = md_StoredVoting.Fields().ByName("counting")
 	fd_StoredVoting_title = md_StoredVoting.Fields().ByName("title")
+	fd_StoredVoting_electoral_roll = md_StoredVoting.Fields().ByName("electoral_roll")
 }
 
 var _ protoreflect.Message = (*fastReflection_StoredVoting)(nil)
@@ -201,6 +203,12 @@ func (x *fastReflection_StoredVoting) Range(f func(protoreflect.FieldDescriptor,
 			return
 		}
 	}
+	if x.ElectoralRoll != nil {
+		value := protoreflect.ValueOfMessage(x.ElectoralRoll.ProtoReflect())
+		if !f(fd_StoredVoting_electoral_roll, value) {
+			return
+		}
+	}
 }
 
 // Has reports whether a field is populated.
@@ -224,6 +232,8 @@ func (x *fastReflection_StoredVoting) Has(fd protoreflect.FieldDescriptor) bool 
 		return len(x.Counting) != 0
 	case "mavs.mavs.StoredVoting.title":
 		return x.Title != ""
+	case "mavs.mavs.StoredVoting.electoral_roll":
+		return x.ElectoralRoll != nil
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: mavs.mavs.StoredVoting"))
@@ -248,6 +258,8 @@ func (x *fastReflection_StoredVoting) Clear(fd protoreflect.FieldDescriptor) {
 		x.Counting = nil
 	case "mavs.mavs.StoredVoting.title":
 		x.Title = ""
+	case "mavs.mavs.StoredVoting.electoral_roll":
+		x.ElectoralRoll = nil
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: mavs.mavs.StoredVoting"))
@@ -279,6 +291,9 @@ func (x *fastReflection_StoredVoting) Get(descriptor protoreflect.FieldDescripto
 	case "mavs.mavs.StoredVoting.title":
 		value := x.Title
 		return protoreflect.ValueOfString(value)
+	case "mavs.mavs.StoredVoting.electoral_roll":
+		value := x.ElectoralRoll
+		return protoreflect.ValueOfMessage(value.ProtoReflect())
 	default:
 		if descriptor.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: mavs.mavs.StoredVoting"))
@@ -309,6 +324,8 @@ func (x *fastReflection_StoredVoting) Set(fd protoreflect.FieldDescriptor, value
 		x.Counting = *cmv.m
 	case "mavs.mavs.StoredVoting.title":
 		x.Title = value.Interface().(string)
+	case "mavs.mavs.StoredVoting.electoral_roll":
+		x.ElectoralRoll = value.Message().Interface().(*ElectoralRoll)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: mavs.mavs.StoredVoting"))
@@ -335,6 +352,11 @@ func (x *fastReflection_StoredVoting) Mutable(fd protoreflect.FieldDescriptor) p
 		}
 		value := &_StoredVoting_3_map{m: &x.Counting}
 		return protoreflect.ValueOfMap(value)
+	case "mavs.mavs.StoredVoting.electoral_roll":
+		if x.ElectoralRoll == nil {
+			x.ElectoralRoll = new(ElectoralRoll)
+		}
+		return protoreflect.ValueOfMessage(x.ElectoralRoll.ProtoReflect())
 	case "mavs.mavs.StoredVoting.index":
 		panic(fmt.Errorf("field index of message mavs.mavs.StoredVoting is not mutable"))
 	case "mavs.mavs.StoredVoting.timewindow":
@@ -363,6 +385,9 @@ func (x *fastReflection_StoredVoting) NewField(fd protoreflect.FieldDescriptor) 
 		return protoreflect.ValueOfMap(&_StoredVoting_3_map{m: &m})
 	case "mavs.mavs.StoredVoting.title":
 		return protoreflect.ValueOfString("")
+	case "mavs.mavs.StoredVoting.electoral_roll":
+		m := new(ElectoralRoll)
+		return protoreflect.ValueOfMessage(m.ProtoReflect())
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: mavs.mavs.StoredVoting"))
@@ -465,6 +490,10 @@ func (x *fastReflection_StoredVoting) ProtoMethods() *protoiface.Methods {
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
+		if x.ElectoralRoll != nil {
+			l = options.Size(x.ElectoralRoll)
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
 		if x.unknownFields != nil {
 			n += len(x.unknownFields)
 		}
@@ -493,6 +522,20 @@ func (x *fastReflection_StoredVoting) ProtoMethods() *protoiface.Methods {
 		if x.unknownFields != nil {
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
+		}
+		if x.ElectoralRoll != nil {
+			encoded, err := options.Marshal(x.ElectoralRoll)
+			if err != nil {
+				return protoiface.MarshalOutput{
+					NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+					Buf:               input.Buf,
+				}, err
+			}
+			i -= len(encoded)
+			copy(dAtA[i:], encoded)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
+			i--
+			dAtA[i] = 0x2a
 		}
 		if len(x.Title) > 0 {
 			i -= len(x.Title)
@@ -814,6 +857,42 @@ func (x *fastReflection_StoredVoting) ProtoMethods() *protoiface.Methods {
 				}
 				x.Title = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
+			case 5:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ElectoralRoll", wireType)
+				}
+				var msglen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					msglen |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if msglen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + msglen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				if x.ElectoralRoll == nil {
+					x.ElectoralRoll = &ElectoralRoll{}
+				}
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.ElectoralRoll); err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				iNdEx = postIndex
 			default:
 				iNdEx = preIndex
 				skippy, err := runtime.Skip(dAtA[iNdEx:])
@@ -867,10 +946,11 @@ type StoredVoting struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Index      string            `protobuf:"bytes,1,opt,name=index,proto3" json:"index,omitempty"`
-	Timewindow string            `protobuf:"bytes,2,opt,name=timewindow,proto3" json:"timewindow,omitempty"`
-	Counting   map[string]uint64 `protobuf:"bytes,3,rep,name=counting,proto3" json:"counting,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
-	Title      string            `protobuf:"bytes,4,opt,name=title,proto3" json:"title,omitempty"`
+	Index         string            `protobuf:"bytes,1,opt,name=index,proto3" json:"index,omitempty"`
+	Timewindow    string            `protobuf:"bytes,2,opt,name=timewindow,proto3" json:"timewindow,omitempty"`
+	Counting      map[string]uint64 `protobuf:"bytes,3,rep,name=counting,proto3" json:"counting,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
+	Title         string            `protobuf:"bytes,4,opt,name=title,proto3" json:"title,omitempty"`
+	ElectoralRoll *ElectoralRoll    `protobuf:"bytes,5,opt,name=electoral_roll,json=electoralRoll,proto3" json:"electoral_roll,omitempty"`
 }
 
 func (x *StoredVoting) Reset() {
@@ -921,12 +1001,21 @@ func (x *StoredVoting) GetTitle() string {
 	return ""
 }
 
+func (x *StoredVoting) GetElectoralRoll() *ElectoralRoll {
+	if x != nil {
+		return x.ElectoralRoll
+	}
+	return nil
+}
+
 var File_mavs_mavs_stored_voting_proto protoreflect.FileDescriptor
 
 var file_mavs_mavs_stored_voting_proto_rawDesc = []byte{
 	0x0a, 0x1d, 0x6d, 0x61, 0x76, 0x73, 0x2f, 0x6d, 0x61, 0x76, 0x73, 0x2f, 0x73, 0x74, 0x6f, 0x72,
 	0x65, 0x64, 0x5f, 0x76, 0x6f, 0x74, 0x69, 0x6e, 0x67, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12,
-	0x09, 0x6d, 0x61, 0x76, 0x73, 0x2e, 0x6d, 0x61, 0x76, 0x73, 0x22, 0xda, 0x01, 0x0a, 0x0c, 0x53,
+	0x09, 0x6d, 0x61, 0x76, 0x73, 0x2e, 0x6d, 0x61, 0x76, 0x73, 0x1a, 0x1e, 0x6d, 0x61, 0x76, 0x73,
+	0x2f, 0x6d, 0x61, 0x76, 0x73, 0x2f, 0x65, 0x6c, 0x65, 0x63, 0x74, 0x6f, 0x72, 0x61, 0x6c, 0x5f,
+	0x72, 0x6f, 0x6c, 0x6c, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x9b, 0x02, 0x0a, 0x0c, 0x53,
 	0x74, 0x6f, 0x72, 0x65, 0x64, 0x56, 0x6f, 0x74, 0x69, 0x6e, 0x67, 0x12, 0x14, 0x0a, 0x05, 0x69,
 	0x6e, 0x64, 0x65, 0x78, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x69, 0x6e, 0x64, 0x65,
 	0x78, 0x12, 0x1e, 0x0a, 0x0a, 0x74, 0x69, 0x6d, 0x65, 0x77, 0x69, 0x6e, 0x64, 0x6f, 0x77, 0x18,
@@ -936,20 +1025,24 @@ var file_mavs_mavs_stored_voting_proto_rawDesc = []byte{
 	0x53, 0x74, 0x6f, 0x72, 0x65, 0x64, 0x56, 0x6f, 0x74, 0x69, 0x6e, 0x67, 0x2e, 0x43, 0x6f, 0x75,
 	0x6e, 0x74, 0x69, 0x6e, 0x67, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x52, 0x08, 0x63, 0x6f, 0x75, 0x6e,
 	0x74, 0x69, 0x6e, 0x67, 0x12, 0x14, 0x0a, 0x05, 0x74, 0x69, 0x74, 0x6c, 0x65, 0x18, 0x04, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x05, 0x74, 0x69, 0x74, 0x6c, 0x65, 0x1a, 0x3b, 0x0a, 0x0d, 0x43, 0x6f,
-	0x75, 0x6e, 0x74, 0x69, 0x6e, 0x67, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x12, 0x10, 0x0a, 0x03, 0x6b,
-	0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6b, 0x65, 0x79, 0x12, 0x14, 0x0a,
-	0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x52, 0x05, 0x76, 0x61,
-	0x6c, 0x75, 0x65, 0x3a, 0x02, 0x38, 0x01, 0x42, 0x83, 0x01, 0x0a, 0x0d, 0x63, 0x6f, 0x6d, 0x2e,
-	0x6d, 0x61, 0x76, 0x73, 0x2e, 0x6d, 0x61, 0x76, 0x73, 0x42, 0x11, 0x53, 0x74, 0x6f, 0x72, 0x65,
-	0x64, 0x56, 0x6f, 0x74, 0x69, 0x6e, 0x67, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x1a,
-	0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x73, 0x64, 0x6b, 0x2e, 0x69, 0x6f, 0x2f, 0x61, 0x70, 0x69,
-	0x2f, 0x6d, 0x61, 0x76, 0x73, 0x2f, 0x6d, 0x61, 0x76, 0x73, 0xa2, 0x02, 0x03, 0x4d, 0x4d, 0x58,
-	0xaa, 0x02, 0x09, 0x4d, 0x61, 0x76, 0x73, 0x2e, 0x4d, 0x61, 0x76, 0x73, 0xca, 0x02, 0x09, 0x4d,
-	0x61, 0x76, 0x73, 0x5c, 0x4d, 0x61, 0x76, 0x73, 0xe2, 0x02, 0x15, 0x4d, 0x61, 0x76, 0x73, 0x5c,
-	0x4d, 0x61, 0x76, 0x73, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61,
-	0xea, 0x02, 0x0a, 0x4d, 0x61, 0x76, 0x73, 0x3a, 0x3a, 0x4d, 0x61, 0x76, 0x73, 0x62, 0x06, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x01, 0x28, 0x09, 0x52, 0x05, 0x74, 0x69, 0x74, 0x6c, 0x65, 0x12, 0x3f, 0x0a, 0x0e, 0x65, 0x6c,
+	0x65, 0x63, 0x74, 0x6f, 0x72, 0x61, 0x6c, 0x5f, 0x72, 0x6f, 0x6c, 0x6c, 0x18, 0x05, 0x20, 0x01,
+	0x28, 0x0b, 0x32, 0x18, 0x2e, 0x6d, 0x61, 0x76, 0x73, 0x2e, 0x6d, 0x61, 0x76, 0x73, 0x2e, 0x45,
+	0x6c, 0x65, 0x63, 0x74, 0x6f, 0x72, 0x61, 0x6c, 0x52, 0x6f, 0x6c, 0x6c, 0x52, 0x0d, 0x65, 0x6c,
+	0x65, 0x63, 0x74, 0x6f, 0x72, 0x61, 0x6c, 0x52, 0x6f, 0x6c, 0x6c, 0x1a, 0x3b, 0x0a, 0x0d, 0x43,
+	0x6f, 0x75, 0x6e, 0x74, 0x69, 0x6e, 0x67, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x12, 0x10, 0x0a, 0x03,
+	0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6b, 0x65, 0x79, 0x12, 0x14,
+	0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x52, 0x05, 0x76,
+	0x61, 0x6c, 0x75, 0x65, 0x3a, 0x02, 0x38, 0x01, 0x42, 0x83, 0x01, 0x0a, 0x0d, 0x63, 0x6f, 0x6d,
+	0x2e, 0x6d, 0x61, 0x76, 0x73, 0x2e, 0x6d, 0x61, 0x76, 0x73, 0x42, 0x11, 0x53, 0x74, 0x6f, 0x72,
+	0x65, 0x64, 0x56, 0x6f, 0x74, 0x69, 0x6e, 0x67, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a,
+	0x1a, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x73, 0x64, 0x6b, 0x2e, 0x69, 0x6f, 0x2f, 0x61, 0x70,
+	0x69, 0x2f, 0x6d, 0x61, 0x76, 0x73, 0x2f, 0x6d, 0x61, 0x76, 0x73, 0xa2, 0x02, 0x03, 0x4d, 0x4d,
+	0x58, 0xaa, 0x02, 0x09, 0x4d, 0x61, 0x76, 0x73, 0x2e, 0x4d, 0x61, 0x76, 0x73, 0xca, 0x02, 0x09,
+	0x4d, 0x61, 0x76, 0x73, 0x5c, 0x4d, 0x61, 0x76, 0x73, 0xe2, 0x02, 0x15, 0x4d, 0x61, 0x76, 0x73,
+	0x5c, 0x4d, 0x61, 0x76, 0x73, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74,
+	0x61, 0xea, 0x02, 0x0a, 0x4d, 0x61, 0x76, 0x73, 0x3a, 0x3a, 0x4d, 0x61, 0x76, 0x73, 0x62, 0x06,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -966,16 +1059,18 @@ func file_mavs_mavs_stored_voting_proto_rawDescGZIP() []byte {
 
 var file_mavs_mavs_stored_voting_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_mavs_mavs_stored_voting_proto_goTypes = []interface{}{
-	(*StoredVoting)(nil), // 0: mavs.mavs.StoredVoting
-	nil,                  // 1: mavs.mavs.StoredVoting.CountingEntry
+	(*StoredVoting)(nil),  // 0: mavs.mavs.StoredVoting
+	nil,                   // 1: mavs.mavs.StoredVoting.CountingEntry
+	(*ElectoralRoll)(nil), // 2: mavs.mavs.ElectoralRoll
 }
 var file_mavs_mavs_stored_voting_proto_depIdxs = []int32{
 	1, // 0: mavs.mavs.StoredVoting.counting:type_name -> mavs.mavs.StoredVoting.CountingEntry
-	1, // [1:1] is the sub-list for method output_type
-	1, // [1:1] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	2, // 1: mavs.mavs.StoredVoting.electoral_roll:type_name -> mavs.mavs.ElectoralRoll
+	2, // [2:2] is the sub-list for method output_type
+	2, // [2:2] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_mavs_mavs_stored_voting_proto_init() }
@@ -983,6 +1078,7 @@ func file_mavs_mavs_stored_voting_proto_init() {
 	if File_mavs_mavs_stored_voting_proto != nil {
 		return
 	}
+	file_mavs_mavs_electoral_roll_proto_init()
 	if !protoimpl.UnsafeEnabled {
 		file_mavs_mavs_stored_voting_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*StoredVoting); i {

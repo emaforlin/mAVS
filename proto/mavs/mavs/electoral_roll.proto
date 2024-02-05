@@ -1,0 +1,9 @@
+syntax = "proto3";
+package mavs.mavs;
+
+option go_package = "github.com/emaforlin/mAVS/x/mavs/types";
+
+message ElectoralRoll {
+  
+  string voters = 1; 
+}
