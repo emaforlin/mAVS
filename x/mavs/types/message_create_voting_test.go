@@ -21,7 +21,7 @@ func TestMsgCreateVoting_ValidateBasic(t *testing.T) {
 				Creator:    "invalid_address",
 				Title:      "valid_title",
 				Candidates: "candidate list separated by a space like this",
-				Timewindow: "30991110080000 30991110140000", //time window valid for a while
+				Timewindow: "3099.11.10.8.0.0 3099.11.10.14.0.0.0", //time window valid for a while
 			},
 			err: sdkerrors.ErrInvalidAddress,
 		}, {
@@ -30,7 +30,7 @@ func TestMsgCreateVoting_ValidateBasic(t *testing.T) {
 				Creator:    sample.AccAddress(),
 				Title:      "This voting has already ended",
 				Candidates: "candidate1 candidate2 candidate3",
-				Timewindow: "20130821120000 20130821233000", //time window caducated in 2013
+				Timewindow: "2013.8.21.12.0.0.0 2013.8.21.23.30.0", //time window caducated in 2013
 			},
 			err: types.ErrVotationEnded,
 		}, {
@@ -39,7 +39,7 @@ func TestMsgCreateVoting_ValidateBasic(t *testing.T) {
 				Creator:    sample.AccAddress(),
 				Title:      "",
 				Candidates: "candidate1 candidate2 candidate3",
-				Timewindow: "30991110080000 30991110140000",
+				Timewindow: "3099.11.10.8.0.0 3099.11.10.14.0.0.0",
 			},
 			err: types.ErrBadStoredVoting,
 		}, {
@@ -48,7 +48,7 @@ func TestMsgCreateVoting_ValidateBasic(t *testing.T) {
 				Creator:    sample.AccAddress(),
 				Title:      "candidate list empty",
 				Candidates: "",
-				Timewindow: "30991110080000 30991110140000",
+				Timewindow: "3099.11.10.8.0.0 3099.11.10.14.0.0.0",
 			},
 			err: types.ErrNotEnoughCandidates,
 		},
