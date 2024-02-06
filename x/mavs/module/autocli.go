@@ -33,6 +33,13 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Short:          "Shows a storedVoting",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "index"}},
 				},
+				{
+					RpcMethod:      "ShowVoter",
+					Use:            "show-voter [dni] [voting-id]",
+					Short:          "Query showVoter",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "dni"}, {ProtoField: "votingId"}},
+				},
+
 				// this line is used by ignite scaffolding # autocli/query
 			},
 		},

@@ -3461,6 +3461,925 @@ func (x *fastReflection_QueryAllStoredVotingResponse) ProtoMethods() *protoiface
 	}
 }
 
+var (
+	md_QueryShowVoterRequest          protoreflect.MessageDescriptor
+	fd_QueryShowVoterRequest_dni      protoreflect.FieldDescriptor
+	fd_QueryShowVoterRequest_votingId protoreflect.FieldDescriptor
+)
+
+func init() {
+	file_mavs_mavs_query_proto_init()
+	md_QueryShowVoterRequest = File_mavs_mavs_query_proto.Messages().ByName("QueryShowVoterRequest")
+	fd_QueryShowVoterRequest_dni = md_QueryShowVoterRequest.Fields().ByName("dni")
+	fd_QueryShowVoterRequest_votingId = md_QueryShowVoterRequest.Fields().ByName("votingId")
+}
+
+var _ protoreflect.Message = (*fastReflection_QueryShowVoterRequest)(nil)
+
+type fastReflection_QueryShowVoterRequest QueryShowVoterRequest
+
+func (x *QueryShowVoterRequest) ProtoReflect() protoreflect.Message {
+	return (*fastReflection_QueryShowVoterRequest)(x)
+}
+
+func (x *QueryShowVoterRequest) slowProtoReflect() protoreflect.Message {
+	mi := &file_mavs_mavs_query_proto_msgTypes[8]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+var _fastReflection_QueryShowVoterRequest_messageType fastReflection_QueryShowVoterRequest_messageType
+var _ protoreflect.MessageType = fastReflection_QueryShowVoterRequest_messageType{}
+
+type fastReflection_QueryShowVoterRequest_messageType struct{}
+
+func (x fastReflection_QueryShowVoterRequest_messageType) Zero() protoreflect.Message {
+	return (*fastReflection_QueryShowVoterRequest)(nil)
+}
+func (x fastReflection_QueryShowVoterRequest_messageType) New() protoreflect.Message {
+	return new(fastReflection_QueryShowVoterRequest)
+}
+func (x fastReflection_QueryShowVoterRequest_messageType) Descriptor() protoreflect.MessageDescriptor {
+	return md_QueryShowVoterRequest
+}
+
+// Descriptor returns message descriptor, which contains only the protobuf
+// type information for the message.
+func (x *fastReflection_QueryShowVoterRequest) Descriptor() protoreflect.MessageDescriptor {
+	return md_QueryShowVoterRequest
+}
+
+// Type returns the message type, which encapsulates both Go and protobuf
+// type information. If the Go type information is not needed,
+// it is recommended that the message descriptor be used instead.
+func (x *fastReflection_QueryShowVoterRequest) Type() protoreflect.MessageType {
+	return _fastReflection_QueryShowVoterRequest_messageType
+}
+
+// New returns a newly allocated and mutable empty message.
+func (x *fastReflection_QueryShowVoterRequest) New() protoreflect.Message {
+	return new(fastReflection_QueryShowVoterRequest)
+}
+
+// Interface unwraps the message reflection interface and
+// returns the underlying ProtoMessage interface.
+func (x *fastReflection_QueryShowVoterRequest) Interface() protoreflect.ProtoMessage {
+	return (*QueryShowVoterRequest)(x)
+}
+
+// Range iterates over every populated field in an undefined order,
+// calling f for each field descriptor and value encountered.
+// Range returns immediately if f returns false.
+// While iterating, mutating operations may only be performed
+// on the current field descriptor.
+func (x *fastReflection_QueryShowVoterRequest) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+	if x.Dni != "" {
+		value := protoreflect.ValueOfString(x.Dni)
+		if !f(fd_QueryShowVoterRequest_dni, value) {
+			return
+		}
+	}
+	if x.VotingId != "" {
+		value := protoreflect.ValueOfString(x.VotingId)
+		if !f(fd_QueryShowVoterRequest_votingId, value) {
+			return
+		}
+	}
+}
+
+// Has reports whether a field is populated.
+//
+// Some fields have the property of nullability where it is possible to
+// distinguish between the default value of a field and whether the field
+// was explicitly populated with the default value. Singular message fields,
+// member fields of a oneof, and proto2 scalar fields are nullable. Such
+// fields are populated only if explicitly set.
+//
+// In other cases (aside from the nullable cases above),
+// a proto3 scalar field is populated if it contains a non-zero value, and
+// a repeated field is populated if it is non-empty.
+func (x *fastReflection_QueryShowVoterRequest) Has(fd protoreflect.FieldDescriptor) bool {
+	switch fd.FullName() {
+	case "mavs.mavs.QueryShowVoterRequest.dni":
+		return x.Dni != ""
+	case "mavs.mavs.QueryShowVoterRequest.votingId":
+		return x.VotingId != ""
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: mavs.mavs.QueryShowVoterRequest"))
+		}
+		panic(fmt.Errorf("message mavs.mavs.QueryShowVoterRequest does not contain field %s", fd.FullName()))
+	}
+}
+
+// Clear clears the field such that a subsequent Has call reports false.
+//
+// Clearing an extension field clears both the extension type and value
+// associated with the given field number.
+//
+// Clear is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_QueryShowVoterRequest) Clear(fd protoreflect.FieldDescriptor) {
+	switch fd.FullName() {
+	case "mavs.mavs.QueryShowVoterRequest.dni":
+		x.Dni = ""
+	case "mavs.mavs.QueryShowVoterRequest.votingId":
+		x.VotingId = ""
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: mavs.mavs.QueryShowVoterRequest"))
+		}
+		panic(fmt.Errorf("message mavs.mavs.QueryShowVoterRequest does not contain field %s", fd.FullName()))
+	}
+}
+
+// Get retrieves the value for a field.
+//
+// For unpopulated scalars, it returns the default value, where
+// the default value of a bytes scalar is guaranteed to be a copy.
+// For unpopulated composite types, it returns an empty, read-only view
+// of the value; to obtain a mutable reference, use Mutable.
+func (x *fastReflection_QueryShowVoterRequest) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
+	switch descriptor.FullName() {
+	case "mavs.mavs.QueryShowVoterRequest.dni":
+		value := x.Dni
+		return protoreflect.ValueOfString(value)
+	case "mavs.mavs.QueryShowVoterRequest.votingId":
+		value := x.VotingId
+		return protoreflect.ValueOfString(value)
+	default:
+		if descriptor.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: mavs.mavs.QueryShowVoterRequest"))
+		}
+		panic(fmt.Errorf("message mavs.mavs.QueryShowVoterRequest does not contain field %s", descriptor.FullName()))
+	}
+}
+
+// Set stores the value for a field.
+//
+// For a field belonging to a oneof, it implicitly clears any other field
+// that may be currently set within the same oneof.
+// For extension fields, it implicitly stores the provided ExtensionType.
+// When setting a composite type, it is unspecified whether the stored value
+// aliases the source's memory in any way. If the composite value is an
+// empty, read-only value, then it panics.
+//
+// Set is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_QueryShowVoterRequest) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
+	switch fd.FullName() {
+	case "mavs.mavs.QueryShowVoterRequest.dni":
+		x.Dni = value.Interface().(string)
+	case "mavs.mavs.QueryShowVoterRequest.votingId":
+		x.VotingId = value.Interface().(string)
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: mavs.mavs.QueryShowVoterRequest"))
+		}
+		panic(fmt.Errorf("message mavs.mavs.QueryShowVoterRequest does not contain field %s", fd.FullName()))
+	}
+}
+
+// Mutable returns a mutable reference to a composite type.
+//
+// If the field is unpopulated, it may allocate a composite value.
+// For a field belonging to a oneof, it implicitly clears any other field
+// that may be currently set within the same oneof.
+// For extension fields, it implicitly stores the provided ExtensionType
+// if not already stored.
+// It panics if the field does not contain a composite type.
+//
+// Mutable is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_QueryShowVoterRequest) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
+	switch fd.FullName() {
+	case "mavs.mavs.QueryShowVoterRequest.dni":
+		panic(fmt.Errorf("field dni of message mavs.mavs.QueryShowVoterRequest is not mutable"))
+	case "mavs.mavs.QueryShowVoterRequest.votingId":
+		panic(fmt.Errorf("field votingId of message mavs.mavs.QueryShowVoterRequest is not mutable"))
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: mavs.mavs.QueryShowVoterRequest"))
+		}
+		panic(fmt.Errorf("message mavs.mavs.QueryShowVoterRequest does not contain field %s", fd.FullName()))
+	}
+}
+
+// NewField returns a new value that is assignable to the field
+// for the given descriptor. For scalars, this returns the default value.
+// For lists, maps, and messages, this returns a new, empty, mutable value.
+func (x *fastReflection_QueryShowVoterRequest) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
+	switch fd.FullName() {
+	case "mavs.mavs.QueryShowVoterRequest.dni":
+		return protoreflect.ValueOfString("")
+	case "mavs.mavs.QueryShowVoterRequest.votingId":
+		return protoreflect.ValueOfString("")
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: mavs.mavs.QueryShowVoterRequest"))
+		}
+		panic(fmt.Errorf("message mavs.mavs.QueryShowVoterRequest does not contain field %s", fd.FullName()))
+	}
+}
+
+// WhichOneof reports which field within the oneof is populated,
+// returning nil if none are populated.
+// It panics if the oneof descriptor does not belong to this message.
+func (x *fastReflection_QueryShowVoterRequest) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
+	switch d.FullName() {
+	default:
+		panic(fmt.Errorf("%s is not a oneof field in mavs.mavs.QueryShowVoterRequest", d.FullName()))
+	}
+	panic("unreachable")
+}
+
+// GetUnknown retrieves the entire list of unknown fields.
+// The caller may only mutate the contents of the RawFields
+// if the mutated bytes are stored back into the message with SetUnknown.
+func (x *fastReflection_QueryShowVoterRequest) GetUnknown() protoreflect.RawFields {
+	return x.unknownFields
+}
+
+// SetUnknown stores an entire list of unknown fields.
+// The raw fields must be syntactically valid according to the wire format.
+// An implementation may panic if this is not the case.
+// Once stored, the caller must not mutate the content of the RawFields.
+// An empty RawFields may be passed to clear the fields.
+//
+// SetUnknown is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_QueryShowVoterRequest) SetUnknown(fields protoreflect.RawFields) {
+	x.unknownFields = fields
+}
+
+// IsValid reports whether the message is valid.
+//
+// An invalid message is an empty, read-only value.
+//
+// An invalid message often corresponds to a nil pointer of the concrete
+// message type, but the details are implementation dependent.
+// Validity is not part of the protobuf data model, and may not
+// be preserved in marshaling or other operations.
+func (x *fastReflection_QueryShowVoterRequest) IsValid() bool {
+	return x != nil
+}
+
+// ProtoMethods returns optional fastReflectionFeature-path implementations of various operations.
+// This method may return nil.
+//
+// The returned methods type is identical to
+// "google.golang.org/protobuf/runtime/protoiface".Methods.
+// Consult the protoiface package documentation for details.
+func (x *fastReflection_QueryShowVoterRequest) ProtoMethods() *protoiface.Methods {
+	size := func(input protoiface.SizeInput) protoiface.SizeOutput {
+		x := input.Message.Interface().(*QueryShowVoterRequest)
+		if x == nil {
+			return protoiface.SizeOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Size:              0,
+			}
+		}
+		options := runtime.SizeInputToOptions(input)
+		_ = options
+		var n int
+		var l int
+		_ = l
+		l = len(x.Dni)
+		if l > 0 {
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
+		l = len(x.VotingId)
+		if l > 0 {
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
+		if x.unknownFields != nil {
+			n += len(x.unknownFields)
+		}
+		return protoiface.SizeOutput{
+			NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+			Size:              n,
+		}
+	}
+
+	marshal := func(input protoiface.MarshalInput) (protoiface.MarshalOutput, error) {
+		x := input.Message.Interface().(*QueryShowVoterRequest)
+		if x == nil {
+			return protoiface.MarshalOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Buf:               input.Buf,
+			}, nil
+		}
+		options := runtime.MarshalInputToOptions(input)
+		_ = options
+		size := options.Size(x)
+		dAtA := make([]byte, size)
+		i := len(dAtA)
+		_ = i
+		var l int
+		_ = l
+		if x.unknownFields != nil {
+			i -= len(x.unknownFields)
+			copy(dAtA[i:], x.unknownFields)
+		}
+		if len(x.VotingId) > 0 {
+			i -= len(x.VotingId)
+			copy(dAtA[i:], x.VotingId)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.VotingId)))
+			i--
+			dAtA[i] = 0x12
+		}
+		if len(x.Dni) > 0 {
+			i -= len(x.Dni)
+			copy(dAtA[i:], x.Dni)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Dni)))
+			i--
+			dAtA[i] = 0xa
+		}
+		if input.Buf != nil {
+			input.Buf = append(input.Buf, dAtA...)
+		} else {
+			input.Buf = dAtA
+		}
+		return protoiface.MarshalOutput{
+			NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+			Buf:               input.Buf,
+		}, nil
+	}
+	unmarshal := func(input protoiface.UnmarshalInput) (protoiface.UnmarshalOutput, error) {
+		x := input.Message.Interface().(*QueryShowVoterRequest)
+		if x == nil {
+			return protoiface.UnmarshalOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Flags:             input.Flags,
+			}, nil
+		}
+		options := runtime.UnmarshalInputToOptions(input)
+		_ = options
+		dAtA := input.Buf
+		l := len(dAtA)
+		iNdEx := 0
+		for iNdEx < l {
+			preIndex := iNdEx
+			var wire uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				wire |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			fieldNum := int32(wire >> 3)
+			wireType := int(wire & 0x7)
+			if wireType == 4 {
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryShowVoterRequest: wiretype end group for non-group")
+			}
+			if fieldNum <= 0 {
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryShowVoterRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+			}
+			switch fieldNum {
+			case 1:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Dni", wireType)
+				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.Dni = string(dAtA[iNdEx:postIndex])
+				iNdEx = postIndex
+			case 2:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field VotingId", wireType)
+				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.VotingId = string(dAtA[iNdEx:postIndex])
+				iNdEx = postIndex
+			default:
+				iNdEx = preIndex
+				skippy, err := runtime.Skip(dAtA[iNdEx:])
+				if err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				if (skippy < 0) || (iNdEx+skippy) < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if (iNdEx + skippy) > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				if !options.DiscardUnknown {
+					x.unknownFields = append(x.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+				}
+				iNdEx += skippy
+			}
+		}
+
+		if iNdEx > l {
+			return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+		}
+		return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, nil
+	}
+	return &protoiface.Methods{
+		NoUnkeyedLiterals: struct{}{},
+		Flags:             protoiface.SupportMarshalDeterministic | protoiface.SupportUnmarshalDiscardUnknown,
+		Size:              size,
+		Marshal:           marshal,
+		Unmarshal:         unmarshal,
+		Merge:             nil,
+		CheckInitialized:  nil,
+	}
+}
+
+var (
+	md_QueryShowVoterResponse       protoreflect.MessageDescriptor
+	fd_QueryShowVoterResponse_voter protoreflect.FieldDescriptor
+)
+
+func init() {
+	file_mavs_mavs_query_proto_init()
+	md_QueryShowVoterResponse = File_mavs_mavs_query_proto.Messages().ByName("QueryShowVoterResponse")
+	fd_QueryShowVoterResponse_voter = md_QueryShowVoterResponse.Fields().ByName("voter")
+}
+
+var _ protoreflect.Message = (*fastReflection_QueryShowVoterResponse)(nil)
+
+type fastReflection_QueryShowVoterResponse QueryShowVoterResponse
+
+func (x *QueryShowVoterResponse) ProtoReflect() protoreflect.Message {
+	return (*fastReflection_QueryShowVoterResponse)(x)
+}
+
+func (x *QueryShowVoterResponse) slowProtoReflect() protoreflect.Message {
+	mi := &file_mavs_mavs_query_proto_msgTypes[9]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+var _fastReflection_QueryShowVoterResponse_messageType fastReflection_QueryShowVoterResponse_messageType
+var _ protoreflect.MessageType = fastReflection_QueryShowVoterResponse_messageType{}
+
+type fastReflection_QueryShowVoterResponse_messageType struct{}
+
+func (x fastReflection_QueryShowVoterResponse_messageType) Zero() protoreflect.Message {
+	return (*fastReflection_QueryShowVoterResponse)(nil)
+}
+func (x fastReflection_QueryShowVoterResponse_messageType) New() protoreflect.Message {
+	return new(fastReflection_QueryShowVoterResponse)
+}
+func (x fastReflection_QueryShowVoterResponse_messageType) Descriptor() protoreflect.MessageDescriptor {
+	return md_QueryShowVoterResponse
+}
+
+// Descriptor returns message descriptor, which contains only the protobuf
+// type information for the message.
+func (x *fastReflection_QueryShowVoterResponse) Descriptor() protoreflect.MessageDescriptor {
+	return md_QueryShowVoterResponse
+}
+
+// Type returns the message type, which encapsulates both Go and protobuf
+// type information. If the Go type information is not needed,
+// it is recommended that the message descriptor be used instead.
+func (x *fastReflection_QueryShowVoterResponse) Type() protoreflect.MessageType {
+	return _fastReflection_QueryShowVoterResponse_messageType
+}
+
+// New returns a newly allocated and mutable empty message.
+func (x *fastReflection_QueryShowVoterResponse) New() protoreflect.Message {
+	return new(fastReflection_QueryShowVoterResponse)
+}
+
+// Interface unwraps the message reflection interface and
+// returns the underlying ProtoMessage interface.
+func (x *fastReflection_QueryShowVoterResponse) Interface() protoreflect.ProtoMessage {
+	return (*QueryShowVoterResponse)(x)
+}
+
+// Range iterates over every populated field in an undefined order,
+// calling f for each field descriptor and value encountered.
+// Range returns immediately if f returns false.
+// While iterating, mutating operations may only be performed
+// on the current field descriptor.
+func (x *fastReflection_QueryShowVoterResponse) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+	if x.Voter != nil {
+		value := protoreflect.ValueOfMessage(x.Voter.ProtoReflect())
+		if !f(fd_QueryShowVoterResponse_voter, value) {
+			return
+		}
+	}
+}
+
+// Has reports whether a field is populated.
+//
+// Some fields have the property of nullability where it is possible to
+// distinguish between the default value of a field and whether the field
+// was explicitly populated with the default value. Singular message fields,
+// member fields of a oneof, and proto2 scalar fields are nullable. Such
+// fields are populated only if explicitly set.
+//
+// In other cases (aside from the nullable cases above),
+// a proto3 scalar field is populated if it contains a non-zero value, and
+// a repeated field is populated if it is non-empty.
+func (x *fastReflection_QueryShowVoterResponse) Has(fd protoreflect.FieldDescriptor) bool {
+	switch fd.FullName() {
+	case "mavs.mavs.QueryShowVoterResponse.voter":
+		return x.Voter != nil
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: mavs.mavs.QueryShowVoterResponse"))
+		}
+		panic(fmt.Errorf("message mavs.mavs.QueryShowVoterResponse does not contain field %s", fd.FullName()))
+	}
+}
+
+// Clear clears the field such that a subsequent Has call reports false.
+//
+// Clearing an extension field clears both the extension type and value
+// associated with the given field number.
+//
+// Clear is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_QueryShowVoterResponse) Clear(fd protoreflect.FieldDescriptor) {
+	switch fd.FullName() {
+	case "mavs.mavs.QueryShowVoterResponse.voter":
+		x.Voter = nil
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: mavs.mavs.QueryShowVoterResponse"))
+		}
+		panic(fmt.Errorf("message mavs.mavs.QueryShowVoterResponse does not contain field %s", fd.FullName()))
+	}
+}
+
+// Get retrieves the value for a field.
+//
+// For unpopulated scalars, it returns the default value, where
+// the default value of a bytes scalar is guaranteed to be a copy.
+// For unpopulated composite types, it returns an empty, read-only view
+// of the value; to obtain a mutable reference, use Mutable.
+func (x *fastReflection_QueryShowVoterResponse) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
+	switch descriptor.FullName() {
+	case "mavs.mavs.QueryShowVoterResponse.voter":
+		value := x.Voter
+		return protoreflect.ValueOfMessage(value.ProtoReflect())
+	default:
+		if descriptor.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: mavs.mavs.QueryShowVoterResponse"))
+		}
+		panic(fmt.Errorf("message mavs.mavs.QueryShowVoterResponse does not contain field %s", descriptor.FullName()))
+	}
+}
+
+// Set stores the value for a field.
+//
+// For a field belonging to a oneof, it implicitly clears any other field
+// that may be currently set within the same oneof.
+// For extension fields, it implicitly stores the provided ExtensionType.
+// When setting a composite type, it is unspecified whether the stored value
+// aliases the source's memory in any way. If the composite value is an
+// empty, read-only value, then it panics.
+//
+// Set is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_QueryShowVoterResponse) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
+	switch fd.FullName() {
+	case "mavs.mavs.QueryShowVoterResponse.voter":
+		x.Voter = value.Message().Interface().(*Voter)
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: mavs.mavs.QueryShowVoterResponse"))
+		}
+		panic(fmt.Errorf("message mavs.mavs.QueryShowVoterResponse does not contain field %s", fd.FullName()))
+	}
+}
+
+// Mutable returns a mutable reference to a composite type.
+//
+// If the field is unpopulated, it may allocate a composite value.
+// For a field belonging to a oneof, it implicitly clears any other field
+// that may be currently set within the same oneof.
+// For extension fields, it implicitly stores the provided ExtensionType
+// if not already stored.
+// It panics if the field does not contain a composite type.
+//
+// Mutable is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_QueryShowVoterResponse) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
+	switch fd.FullName() {
+	case "mavs.mavs.QueryShowVoterResponse.voter":
+		if x.Voter == nil {
+			x.Voter = new(Voter)
+		}
+		return protoreflect.ValueOfMessage(x.Voter.ProtoReflect())
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: mavs.mavs.QueryShowVoterResponse"))
+		}
+		panic(fmt.Errorf("message mavs.mavs.QueryShowVoterResponse does not contain field %s", fd.FullName()))
+	}
+}
+
+// NewField returns a new value that is assignable to the field
+// for the given descriptor. For scalars, this returns the default value.
+// For lists, maps, and messages, this returns a new, empty, mutable value.
+func (x *fastReflection_QueryShowVoterResponse) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
+	switch fd.FullName() {
+	case "mavs.mavs.QueryShowVoterResponse.voter":
+		m := new(Voter)
+		return protoreflect.ValueOfMessage(m.ProtoReflect())
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: mavs.mavs.QueryShowVoterResponse"))
+		}
+		panic(fmt.Errorf("message mavs.mavs.QueryShowVoterResponse does not contain field %s", fd.FullName()))
+	}
+}
+
+// WhichOneof reports which field within the oneof is populated,
+// returning nil if none are populated.
+// It panics if the oneof descriptor does not belong to this message.
+func (x *fastReflection_QueryShowVoterResponse) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
+	switch d.FullName() {
+	default:
+		panic(fmt.Errorf("%s is not a oneof field in mavs.mavs.QueryShowVoterResponse", d.FullName()))
+	}
+	panic("unreachable")
+}
+
+// GetUnknown retrieves the entire list of unknown fields.
+// The caller may only mutate the contents of the RawFields
+// if the mutated bytes are stored back into the message with SetUnknown.
+func (x *fastReflection_QueryShowVoterResponse) GetUnknown() protoreflect.RawFields {
+	return x.unknownFields
+}
+
+// SetUnknown stores an entire list of unknown fields.
+// The raw fields must be syntactically valid according to the wire format.
+// An implementation may panic if this is not the case.
+// Once stored, the caller must not mutate the content of the RawFields.
+// An empty RawFields may be passed to clear the fields.
+//
+// SetUnknown is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_QueryShowVoterResponse) SetUnknown(fields protoreflect.RawFields) {
+	x.unknownFields = fields
+}
+
+// IsValid reports whether the message is valid.
+//
+// An invalid message is an empty, read-only value.
+//
+// An invalid message often corresponds to a nil pointer of the concrete
+// message type, but the details are implementation dependent.
+// Validity is not part of the protobuf data model, and may not
+// be preserved in marshaling or other operations.
+func (x *fastReflection_QueryShowVoterResponse) IsValid() bool {
+	return x != nil
+}
+
+// ProtoMethods returns optional fastReflectionFeature-path implementations of various operations.
+// This method may return nil.
+//
+// The returned methods type is identical to
+// "google.golang.org/protobuf/runtime/protoiface".Methods.
+// Consult the protoiface package documentation for details.
+func (x *fastReflection_QueryShowVoterResponse) ProtoMethods() *protoiface.Methods {
+	size := func(input protoiface.SizeInput) protoiface.SizeOutput {
+		x := input.Message.Interface().(*QueryShowVoterResponse)
+		if x == nil {
+			return protoiface.SizeOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Size:              0,
+			}
+		}
+		options := runtime.SizeInputToOptions(input)
+		_ = options
+		var n int
+		var l int
+		_ = l
+		if x.Voter != nil {
+			l = options.Size(x.Voter)
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
+		if x.unknownFields != nil {
+			n += len(x.unknownFields)
+		}
+		return protoiface.SizeOutput{
+			NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+			Size:              n,
+		}
+	}
+
+	marshal := func(input protoiface.MarshalInput) (protoiface.MarshalOutput, error) {
+		x := input.Message.Interface().(*QueryShowVoterResponse)
+		if x == nil {
+			return protoiface.MarshalOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Buf:               input.Buf,
+			}, nil
+		}
+		options := runtime.MarshalInputToOptions(input)
+		_ = options
+		size := options.Size(x)
+		dAtA := make([]byte, size)
+		i := len(dAtA)
+		_ = i
+		var l int
+		_ = l
+		if x.unknownFields != nil {
+			i -= len(x.unknownFields)
+			copy(dAtA[i:], x.unknownFields)
+		}
+		if x.Voter != nil {
+			encoded, err := options.Marshal(x.Voter)
+			if err != nil {
+				return protoiface.MarshalOutput{
+					NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+					Buf:               input.Buf,
+				}, err
+			}
+			i -= len(encoded)
+			copy(dAtA[i:], encoded)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
+			i--
+			dAtA[i] = 0xa
+		}
+		if input.Buf != nil {
+			input.Buf = append(input.Buf, dAtA...)
+		} else {
+			input.Buf = dAtA
+		}
+		return protoiface.MarshalOutput{
+			NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+			Buf:               input.Buf,
+		}, nil
+	}
+	unmarshal := func(input protoiface.UnmarshalInput) (protoiface.UnmarshalOutput, error) {
+		x := input.Message.Interface().(*QueryShowVoterResponse)
+		if x == nil {
+			return protoiface.UnmarshalOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Flags:             input.Flags,
+			}, nil
+		}
+		options := runtime.UnmarshalInputToOptions(input)
+		_ = options
+		dAtA := input.Buf
+		l := len(dAtA)
+		iNdEx := 0
+		for iNdEx < l {
+			preIndex := iNdEx
+			var wire uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				wire |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			fieldNum := int32(wire >> 3)
+			wireType := int(wire & 0x7)
+			if wireType == 4 {
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryShowVoterResponse: wiretype end group for non-group")
+			}
+			if fieldNum <= 0 {
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryShowVoterResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			}
+			switch fieldNum {
+			case 1:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Voter", wireType)
+				}
+				var msglen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					msglen |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if msglen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + msglen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				if x.Voter == nil {
+					x.Voter = &Voter{}
+				}
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.Voter); err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				iNdEx = postIndex
+			default:
+				iNdEx = preIndex
+				skippy, err := runtime.Skip(dAtA[iNdEx:])
+				if err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				if (skippy < 0) || (iNdEx+skippy) < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if (iNdEx + skippy) > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				if !options.DiscardUnknown {
+					x.unknownFields = append(x.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+				}
+				iNdEx += skippy
+			}
+		}
+
+		if iNdEx > l {
+			return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+		}
+		return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, nil
+	}
+	return &protoiface.Methods{
+		NoUnkeyedLiterals: struct{}{},
+		Flags:             protoiface.SupportMarshalDeterministic | protoiface.SupportUnmarshalDiscardUnknown,
+		Size:              size,
+		Marshal:           marshal,
+		Unmarshal:         unmarshal,
+		Merge:             nil,
+		CheckInitialized:  nil,
+	}
+}
+
 // Code generated by protoc-gen-go. DO NOT EDIT.
 // versions:
 // 	protoc-gen-go v1.27.0
@@ -3747,6 +4666,84 @@ func (x *QueryAllStoredVotingResponse) GetPagination() *v1beta1.PageResponse {
 	return nil
 }
 
+type QueryShowVoterRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Dni      string `protobuf:"bytes,1,opt,name=dni,proto3" json:"dni,omitempty"`
+	VotingId string `protobuf:"bytes,2,opt,name=votingId,proto3" json:"votingId,omitempty"`
+}
+
+func (x *QueryShowVoterRequest) Reset() {
+	*x = QueryShowVoterRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_mavs_mavs_query_proto_msgTypes[8]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *QueryShowVoterRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*QueryShowVoterRequest) ProtoMessage() {}
+
+// Deprecated: Use QueryShowVoterRequest.ProtoReflect.Descriptor instead.
+func (*QueryShowVoterRequest) Descriptor() ([]byte, []int) {
+	return file_mavs_mavs_query_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *QueryShowVoterRequest) GetDni() string {
+	if x != nil {
+		return x.Dni
+	}
+	return ""
+}
+
+func (x *QueryShowVoterRequest) GetVotingId() string {
+	if x != nil {
+		return x.VotingId
+	}
+	return ""
+}
+
+type QueryShowVoterResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Voter *Voter `protobuf:"bytes,1,opt,name=voter,proto3" json:"voter,omitempty"`
+}
+
+func (x *QueryShowVoterResponse) Reset() {
+	*x = QueryShowVoterResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_mavs_mavs_query_proto_msgTypes[9]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *QueryShowVoterResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*QueryShowVoterResponse) ProtoMessage() {}
+
+// Deprecated: Use QueryShowVoterResponse.ProtoReflect.Descriptor instead.
+func (*QueryShowVoterResponse) Descriptor() ([]byte, []int) {
+	return file_mavs_mavs_query_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *QueryShowVoterResponse) GetVoter() *Voter {
+	if x != nil {
+		return x.Voter
+	}
+	return nil
+}
+
 var File_mavs_mavs_query_proto protoreflect.FileDescriptor
 
 var file_mavs_mavs_query_proto_rawDesc = []byte{
@@ -3764,48 +4761,58 @@ var file_mavs_mavs_query_proto_rawDesc = []byte{
 	0x61, 0x76, 0x73, 0x2f, 0x6d, 0x61, 0x76, 0x73, 0x2f, 0x73, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x5f,
 	0x69, 0x6e, 0x66, 0x6f, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x1d, 0x6d, 0x61, 0x76, 0x73,
 	0x2f, 0x6d, 0x61, 0x76, 0x73, 0x2f, 0x73, 0x74, 0x6f, 0x72, 0x65, 0x64, 0x5f, 0x76, 0x6f, 0x74,
-	0x69, 0x6e, 0x67, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x14, 0x0a, 0x12, 0x51, 0x75, 0x65,
-	0x72, 0x79, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22,
-	0x4b, 0x0a, 0x13, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65,
-	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x34, 0x0a, 0x06, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73,
-	0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x11, 0x2e, 0x6d, 0x61, 0x76, 0x73, 0x2e, 0x6d, 0x61,
-	0x76, 0x73, 0x2e, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x42, 0x09, 0xc8, 0xde, 0x1f, 0x00, 0xa8,
-	0xe7, 0xb0, 0x2a, 0x01, 0x52, 0x06, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x22, 0x1b, 0x0a, 0x19,
-	0x51, 0x75, 0x65, 0x72, 0x79, 0x47, 0x65, 0x74, 0x53, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x49, 0x6e,
-	0x66, 0x6f, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x59, 0x0a, 0x1a, 0x51, 0x75, 0x65,
-	0x72, 0x79, 0x47, 0x65, 0x74, 0x53, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x49, 0x6e, 0x66, 0x6f, 0x52,
-	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x3b, 0x0a, 0x0a, 0x53, 0x79, 0x73, 0x74, 0x65,
-	0x6d, 0x49, 0x6e, 0x66, 0x6f, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x15, 0x2e, 0x6d, 0x61,
-	0x76, 0x73, 0x2e, 0x6d, 0x61, 0x76, 0x73, 0x2e, 0x53, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x49, 0x6e,
-	0x66, 0x6f, 0x42, 0x04, 0xc8, 0xde, 0x1f, 0x00, 0x52, 0x0a, 0x53, 0x79, 0x73, 0x74, 0x65, 0x6d,
-	0x49, 0x6e, 0x66, 0x6f, 0x22, 0x33, 0x0a, 0x1b, 0x51, 0x75, 0x65, 0x72, 0x79, 0x47, 0x65, 0x74,
-	0x53, 0x74, 0x6f, 0x72, 0x65, 0x64, 0x56, 0x6f, 0x74, 0x69, 0x6e, 0x67, 0x52, 0x65, 0x71, 0x75,
-	0x65, 0x73, 0x74, 0x12, 0x14, 0x0a, 0x05, 0x69, 0x6e, 0x64, 0x65, 0x78, 0x18, 0x01, 0x20, 0x01,
-	0x28, 0x09, 0x52, 0x05, 0x69, 0x6e, 0x64, 0x65, 0x78, 0x22, 0x61, 0x0a, 0x1c, 0x51, 0x75, 0x65,
-	0x72, 0x79, 0x47, 0x65, 0x74, 0x53, 0x74, 0x6f, 0x72, 0x65, 0x64, 0x56, 0x6f, 0x74, 0x69, 0x6e,
-	0x67, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x41, 0x0a, 0x0c, 0x73, 0x74, 0x6f,
-	0x72, 0x65, 0x64, 0x56, 0x6f, 0x74, 0x69, 0x6e, 0x67, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32,
-	0x17, 0x2e, 0x6d, 0x61, 0x76, 0x73, 0x2e, 0x6d, 0x61, 0x76, 0x73, 0x2e, 0x53, 0x74, 0x6f, 0x72,
-	0x65, 0x64, 0x56, 0x6f, 0x74, 0x69, 0x6e, 0x67, 0x42, 0x04, 0xc8, 0xde, 0x1f, 0x00, 0x52, 0x0c,
-	0x73, 0x74, 0x6f, 0x72, 0x65, 0x64, 0x56, 0x6f, 0x74, 0x69, 0x6e, 0x67, 0x22, 0x65, 0x0a, 0x1b,
-	0x51, 0x75, 0x65, 0x72, 0x79, 0x41, 0x6c, 0x6c, 0x53, 0x74, 0x6f, 0x72, 0x65, 0x64, 0x56, 0x6f,
-	0x74, 0x69, 0x6e, 0x67, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x46, 0x0a, 0x0a, 0x70,
-	0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32,
-	0x26, 0x2e, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x62, 0x61, 0x73, 0x65, 0x2e, 0x71, 0x75,
-	0x65, 0x72, 0x79, 0x2e, 0x76, 0x31, 0x62, 0x65, 0x74, 0x61, 0x31, 0x2e, 0x50, 0x61, 0x67, 0x65,
-	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x52, 0x0a, 0x70, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74,
-	0x69, 0x6f, 0x6e, 0x22, 0xaa, 0x01, 0x0a, 0x1c, 0x51, 0x75, 0x65, 0x72, 0x79, 0x41, 0x6c, 0x6c,
-	0x53, 0x74, 0x6f, 0x72, 0x65, 0x64, 0x56, 0x6f, 0x74, 0x69, 0x6e, 0x67, 0x52, 0x65, 0x73, 0x70,
-	0x6f, 0x6e, 0x73, 0x65, 0x12, 0x41, 0x0a, 0x0c, 0x73, 0x74, 0x6f, 0x72, 0x65, 0x64, 0x56, 0x6f,
-	0x74, 0x69, 0x6e, 0x67, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x17, 0x2e, 0x6d, 0x61, 0x76,
-	0x73, 0x2e, 0x6d, 0x61, 0x76, 0x73, 0x2e, 0x53, 0x74, 0x6f, 0x72, 0x65, 0x64, 0x56, 0x6f, 0x74,
-	0x69, 0x6e, 0x67, 0x42, 0x04, 0xc8, 0xde, 0x1f, 0x00, 0x52, 0x0c, 0x73, 0x74, 0x6f, 0x72, 0x65,
-	0x64, 0x56, 0x6f, 0x74, 0x69, 0x6e, 0x67, 0x12, 0x47, 0x0a, 0x0a, 0x70, 0x61, 0x67, 0x69, 0x6e,
-	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x27, 0x2e, 0x63, 0x6f,
-	0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x62, 0x61, 0x73, 0x65, 0x2e, 0x71, 0x75, 0x65, 0x72, 0x79, 0x2e,
-	0x76, 0x31, 0x62, 0x65, 0x74, 0x61, 0x31, 0x2e, 0x50, 0x61, 0x67, 0x65, 0x52, 0x65, 0x73, 0x70,
-	0x6f, 0x6e, 0x73, 0x65, 0x52, 0x0a, 0x70, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e,
-	0x32, 0xa2, 0x04, 0x0a, 0x05, 0x51, 0x75, 0x65, 0x72, 0x79, 0x12, 0x6c, 0x0a, 0x06, 0x50, 0x61,
+	0x69, 0x6e, 0x67, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x15, 0x6d, 0x61, 0x76, 0x73, 0x2f,
+	0x6d, 0x61, 0x76, 0x73, 0x2f, 0x76, 0x6f, 0x74, 0x65, 0x72, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
+	0x22, 0x14, 0x0a, 0x12, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x4b, 0x0a, 0x13, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50,
+	0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x34, 0x0a,
+	0x06, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x11, 0x2e,
+	0x6d, 0x61, 0x76, 0x73, 0x2e, 0x6d, 0x61, 0x76, 0x73, 0x2e, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73,
+	0x42, 0x09, 0xc8, 0xde, 0x1f, 0x00, 0xa8, 0xe7, 0xb0, 0x2a, 0x01, 0x52, 0x06, 0x70, 0x61, 0x72,
+	0x61, 0x6d, 0x73, 0x22, 0x1b, 0x0a, 0x19, 0x51, 0x75, 0x65, 0x72, 0x79, 0x47, 0x65, 0x74, 0x53,
+	0x79, 0x73, 0x74, 0x65, 0x6d, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x22, 0x59, 0x0a, 0x1a, 0x51, 0x75, 0x65, 0x72, 0x79, 0x47, 0x65, 0x74, 0x53, 0x79, 0x73, 0x74,
+	0x65, 0x6d, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x3b,
+	0x0a, 0x0a, 0x53, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x49, 0x6e, 0x66, 0x6f, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x0b, 0x32, 0x15, 0x2e, 0x6d, 0x61, 0x76, 0x73, 0x2e, 0x6d, 0x61, 0x76, 0x73, 0x2e, 0x53,
+	0x79, 0x73, 0x74, 0x65, 0x6d, 0x49, 0x6e, 0x66, 0x6f, 0x42, 0x04, 0xc8, 0xde, 0x1f, 0x00, 0x52,
+	0x0a, 0x53, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x49, 0x6e, 0x66, 0x6f, 0x22, 0x33, 0x0a, 0x1b, 0x51,
+	0x75, 0x65, 0x72, 0x79, 0x47, 0x65, 0x74, 0x53, 0x74, 0x6f, 0x72, 0x65, 0x64, 0x56, 0x6f, 0x74,
+	0x69, 0x6e, 0x67, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x14, 0x0a, 0x05, 0x69, 0x6e,
+	0x64, 0x65, 0x78, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x69, 0x6e, 0x64, 0x65, 0x78,
+	0x22, 0x61, 0x0a, 0x1c, 0x51, 0x75, 0x65, 0x72, 0x79, 0x47, 0x65, 0x74, 0x53, 0x74, 0x6f, 0x72,
+	0x65, 0x64, 0x56, 0x6f, 0x74, 0x69, 0x6e, 0x67, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x12, 0x41, 0x0a, 0x0c, 0x73, 0x74, 0x6f, 0x72, 0x65, 0x64, 0x56, 0x6f, 0x74, 0x69, 0x6e, 0x67,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x17, 0x2e, 0x6d, 0x61, 0x76, 0x73, 0x2e, 0x6d, 0x61,
+	0x76, 0x73, 0x2e, 0x53, 0x74, 0x6f, 0x72, 0x65, 0x64, 0x56, 0x6f, 0x74, 0x69, 0x6e, 0x67, 0x42,
+	0x04, 0xc8, 0xde, 0x1f, 0x00, 0x52, 0x0c, 0x73, 0x74, 0x6f, 0x72, 0x65, 0x64, 0x56, 0x6f, 0x74,
+	0x69, 0x6e, 0x67, 0x22, 0x65, 0x0a, 0x1b, 0x51, 0x75, 0x65, 0x72, 0x79, 0x41, 0x6c, 0x6c, 0x53,
+	0x74, 0x6f, 0x72, 0x65, 0x64, 0x56, 0x6f, 0x74, 0x69, 0x6e, 0x67, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x12, 0x46, 0x0a, 0x0a, 0x70, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x26, 0x2e, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e,
+	0x62, 0x61, 0x73, 0x65, 0x2e, 0x71, 0x75, 0x65, 0x72, 0x79, 0x2e, 0x76, 0x31, 0x62, 0x65, 0x74,
+	0x61, 0x31, 0x2e, 0x50, 0x61, 0x67, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x52, 0x0a,
+	0x70, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0xaa, 0x01, 0x0a, 0x1c, 0x51,
+	0x75, 0x65, 0x72, 0x79, 0x41, 0x6c, 0x6c, 0x53, 0x74, 0x6f, 0x72, 0x65, 0x64, 0x56, 0x6f, 0x74,
+	0x69, 0x6e, 0x67, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x41, 0x0a, 0x0c, 0x73,
+	0x74, 0x6f, 0x72, 0x65, 0x64, 0x56, 0x6f, 0x74, 0x69, 0x6e, 0x67, 0x18, 0x01, 0x20, 0x03, 0x28,
+	0x0b, 0x32, 0x17, 0x2e, 0x6d, 0x61, 0x76, 0x73, 0x2e, 0x6d, 0x61, 0x76, 0x73, 0x2e, 0x53, 0x74,
+	0x6f, 0x72, 0x65, 0x64, 0x56, 0x6f, 0x74, 0x69, 0x6e, 0x67, 0x42, 0x04, 0xc8, 0xde, 0x1f, 0x00,
+	0x52, 0x0c, 0x73, 0x74, 0x6f, 0x72, 0x65, 0x64, 0x56, 0x6f, 0x74, 0x69, 0x6e, 0x67, 0x12, 0x47,
+	0x0a, 0x0a, 0x70, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x0b, 0x32, 0x27, 0x2e, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x62, 0x61, 0x73, 0x65,
+	0x2e, 0x71, 0x75, 0x65, 0x72, 0x79, 0x2e, 0x76, 0x31, 0x62, 0x65, 0x74, 0x61, 0x31, 0x2e, 0x50,
+	0x61, 0x67, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x52, 0x0a, 0x70, 0x61, 0x67,
+	0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x45, 0x0a, 0x15, 0x51, 0x75, 0x65, 0x72, 0x79,
+	0x53, 0x68, 0x6f, 0x77, 0x56, 0x6f, 0x74, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x12, 0x10, 0x0a, 0x03, 0x64, 0x6e, 0x69, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x64,
+	0x6e, 0x69, 0x12, 0x1a, 0x0a, 0x08, 0x76, 0x6f, 0x74, 0x69, 0x6e, 0x67, 0x49, 0x64, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x76, 0x6f, 0x74, 0x69, 0x6e, 0x67, 0x49, 0x64, 0x22, 0x40,
+	0x0a, 0x16, 0x51, 0x75, 0x65, 0x72, 0x79, 0x53, 0x68, 0x6f, 0x77, 0x56, 0x6f, 0x74, 0x65, 0x72,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x26, 0x0a, 0x05, 0x76, 0x6f, 0x74, 0x65,
+	0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x10, 0x2e, 0x6d, 0x61, 0x76, 0x73, 0x2e, 0x6d,
+	0x61, 0x76, 0x73, 0x2e, 0x56, 0x6f, 0x74, 0x65, 0x72, 0x52, 0x05, 0x76, 0x6f, 0x74, 0x65, 0x72,
+	0x32, 0xaf, 0x05, 0x0a, 0x05, 0x51, 0x75, 0x65, 0x72, 0x79, 0x12, 0x6c, 0x0a, 0x06, 0x50, 0x61,
 	0x72, 0x61, 0x6d, 0x73, 0x12, 0x1d, 0x2e, 0x6d, 0x61, 0x76, 0x73, 0x2e, 0x6d, 0x61, 0x76, 0x73,
 	0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x71, 0x75,
 	0x65, 0x73, 0x74, 0x1a, 0x1e, 0x2e, 0x6d, 0x61, 0x76, 0x73, 0x2e, 0x6d, 0x61, 0x76, 0x73, 0x2e,
@@ -3839,15 +4846,24 @@ var file_mavs_mavs_query_proto_rawDesc = []byte{
 	0x67, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x2a, 0x82, 0xd3, 0xe4, 0x93, 0x02,
 	0x24, 0x12, 0x22, 0x2f, 0x65, 0x6d, 0x61, 0x66, 0x6f, 0x72, 0x6c, 0x69, 0x6e, 0x2f, 0x6d, 0x41,
 	0x56, 0x53, 0x2f, 0x6d, 0x61, 0x76, 0x73, 0x2f, 0x73, 0x74, 0x6f, 0x72, 0x65, 0x64, 0x5f, 0x76,
-	0x6f, 0x74, 0x69, 0x6e, 0x67, 0x42, 0x7c, 0x0a, 0x0d, 0x63, 0x6f, 0x6d, 0x2e, 0x6d, 0x61, 0x76,
-	0x73, 0x2e, 0x6d, 0x61, 0x76, 0x73, 0x42, 0x0a, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x72, 0x6f,
-	0x74, 0x6f, 0x50, 0x01, 0x5a, 0x1a, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x73, 0x64, 0x6b, 0x2e,
-	0x69, 0x6f, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x6d, 0x61, 0x76, 0x73, 0x2f, 0x6d, 0x61, 0x76, 0x73,
-	0xa2, 0x02, 0x03, 0x4d, 0x4d, 0x58, 0xaa, 0x02, 0x09, 0x4d, 0x61, 0x76, 0x73, 0x2e, 0x4d, 0x61,
-	0x76, 0x73, 0xca, 0x02, 0x09, 0x4d, 0x61, 0x76, 0x73, 0x5c, 0x4d, 0x61, 0x76, 0x73, 0xe2, 0x02,
-	0x15, 0x4d, 0x61, 0x76, 0x73, 0x5c, 0x4d, 0x61, 0x76, 0x73, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65,
-	0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x0a, 0x4d, 0x61, 0x76, 0x73, 0x3a, 0x3a, 0x4d,
-	0x61, 0x76, 0x73, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x6f, 0x74, 0x69, 0x6e, 0x67, 0x12, 0x8a, 0x01, 0x0a, 0x09, 0x53, 0x68, 0x6f, 0x77, 0x56, 0x6f,
+	0x74, 0x65, 0x72, 0x12, 0x20, 0x2e, 0x6d, 0x61, 0x76, 0x73, 0x2e, 0x6d, 0x61, 0x76, 0x73, 0x2e,
+	0x51, 0x75, 0x65, 0x72, 0x79, 0x53, 0x68, 0x6f, 0x77, 0x56, 0x6f, 0x74, 0x65, 0x72, 0x52, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x21, 0x2e, 0x6d, 0x61, 0x76, 0x73, 0x2e, 0x6d, 0x61, 0x76,
+	0x73, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x53, 0x68, 0x6f, 0x77, 0x56, 0x6f, 0x74, 0x65, 0x72,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x38, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x32,
+	0x12, 0x30, 0x2f, 0x65, 0x6d, 0x61, 0x66, 0x6f, 0x72, 0x6c, 0x69, 0x6e, 0x2f, 0x6d, 0x41, 0x56,
+	0x53, 0x2f, 0x6d, 0x61, 0x76, 0x73, 0x2f, 0x73, 0x68, 0x6f, 0x77, 0x5f, 0x76, 0x6f, 0x74, 0x65,
+	0x72, 0x2f, 0x7b, 0x64, 0x6e, 0x69, 0x7d, 0x2f, 0x7b, 0x76, 0x6f, 0x74, 0x69, 0x6e, 0x67, 0x49,
+	0x64, 0x7d, 0x42, 0x7c, 0x0a, 0x0d, 0x63, 0x6f, 0x6d, 0x2e, 0x6d, 0x61, 0x76, 0x73, 0x2e, 0x6d,
+	0x61, 0x76, 0x73, 0x42, 0x0a, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50,
+	0x01, 0x5a, 0x1a, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x73, 0x64, 0x6b, 0x2e, 0x69, 0x6f, 0x2f,
+	0x61, 0x70, 0x69, 0x2f, 0x6d, 0x61, 0x76, 0x73, 0x2f, 0x6d, 0x61, 0x76, 0x73, 0xa2, 0x02, 0x03,
+	0x4d, 0x4d, 0x58, 0xaa, 0x02, 0x09, 0x4d, 0x61, 0x76, 0x73, 0x2e, 0x4d, 0x61, 0x76, 0x73, 0xca,
+	0x02, 0x09, 0x4d, 0x61, 0x76, 0x73, 0x5c, 0x4d, 0x61, 0x76, 0x73, 0xe2, 0x02, 0x15, 0x4d, 0x61,
+	0x76, 0x73, 0x5c, 0x4d, 0x61, 0x76, 0x73, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64,
+	0x61, 0x74, 0x61, 0xea, 0x02, 0x0a, 0x4d, 0x61, 0x76, 0x73, 0x3a, 0x3a, 0x4d, 0x61, 0x76, 0x73,
+	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -3862,7 +4878,7 @@ func file_mavs_mavs_query_proto_rawDescGZIP() []byte {
 	return file_mavs_mavs_query_proto_rawDescData
 }
 
-var file_mavs_mavs_query_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_mavs_mavs_query_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_mavs_mavs_query_proto_goTypes = []interface{}{
 	(*QueryParamsRequest)(nil),           // 0: mavs.mavs.QueryParamsRequest
 	(*QueryParamsResponse)(nil),          // 1: mavs.mavs.QueryParamsResponse
@@ -3872,32 +4888,38 @@ var file_mavs_mavs_query_proto_goTypes = []interface{}{
 	(*QueryGetStoredVotingResponse)(nil), // 5: mavs.mavs.QueryGetStoredVotingResponse
 	(*QueryAllStoredVotingRequest)(nil),  // 6: mavs.mavs.QueryAllStoredVotingRequest
 	(*QueryAllStoredVotingResponse)(nil), // 7: mavs.mavs.QueryAllStoredVotingResponse
-	(*Params)(nil),                       // 8: mavs.mavs.Params
-	(*SystemInfo)(nil),                   // 9: mavs.mavs.SystemInfo
-	(*StoredVoting)(nil),                 // 10: mavs.mavs.StoredVoting
-	(*v1beta1.PageRequest)(nil),          // 11: cosmos.base.query.v1beta1.PageRequest
-	(*v1beta1.PageResponse)(nil),         // 12: cosmos.base.query.v1beta1.PageResponse
+	(*QueryShowVoterRequest)(nil),        // 8: mavs.mavs.QueryShowVoterRequest
+	(*QueryShowVoterResponse)(nil),       // 9: mavs.mavs.QueryShowVoterResponse
+	(*Params)(nil),                       // 10: mavs.mavs.Params
+	(*SystemInfo)(nil),                   // 11: mavs.mavs.SystemInfo
+	(*StoredVoting)(nil),                 // 12: mavs.mavs.StoredVoting
+	(*v1beta1.PageRequest)(nil),          // 13: cosmos.base.query.v1beta1.PageRequest
+	(*v1beta1.PageResponse)(nil),         // 14: cosmos.base.query.v1beta1.PageResponse
+	(*Voter)(nil),                        // 15: mavs.mavs.Voter
 }
 var file_mavs_mavs_query_proto_depIdxs = []int32{
-	8,  // 0: mavs.mavs.QueryParamsResponse.params:type_name -> mavs.mavs.Params
-	9,  // 1: mavs.mavs.QueryGetSystemInfoResponse.SystemInfo:type_name -> mavs.mavs.SystemInfo
-	10, // 2: mavs.mavs.QueryGetStoredVotingResponse.storedVoting:type_name -> mavs.mavs.StoredVoting
-	11, // 3: mavs.mavs.QueryAllStoredVotingRequest.pagination:type_name -> cosmos.base.query.v1beta1.PageRequest
-	10, // 4: mavs.mavs.QueryAllStoredVotingResponse.storedVoting:type_name -> mavs.mavs.StoredVoting
-	12, // 5: mavs.mavs.QueryAllStoredVotingResponse.pagination:type_name -> cosmos.base.query.v1beta1.PageResponse
-	0,  // 6: mavs.mavs.Query.Params:input_type -> mavs.mavs.QueryParamsRequest
-	2,  // 7: mavs.mavs.Query.SystemInfo:input_type -> mavs.mavs.QueryGetSystemInfoRequest
-	4,  // 8: mavs.mavs.Query.StoredVoting:input_type -> mavs.mavs.QueryGetStoredVotingRequest
-	6,  // 9: mavs.mavs.Query.StoredVotingAll:input_type -> mavs.mavs.QueryAllStoredVotingRequest
-	1,  // 10: mavs.mavs.Query.Params:output_type -> mavs.mavs.QueryParamsResponse
-	3,  // 11: mavs.mavs.Query.SystemInfo:output_type -> mavs.mavs.QueryGetSystemInfoResponse
-	5,  // 12: mavs.mavs.Query.StoredVoting:output_type -> mavs.mavs.QueryGetStoredVotingResponse
-	7,  // 13: mavs.mavs.Query.StoredVotingAll:output_type -> mavs.mavs.QueryAllStoredVotingResponse
-	10, // [10:14] is the sub-list for method output_type
-	6,  // [6:10] is the sub-list for method input_type
-	6,  // [6:6] is the sub-list for extension type_name
-	6,  // [6:6] is the sub-list for extension extendee
-	0,  // [0:6] is the sub-list for field type_name
+	10, // 0: mavs.mavs.QueryParamsResponse.params:type_name -> mavs.mavs.Params
+	11, // 1: mavs.mavs.QueryGetSystemInfoResponse.SystemInfo:type_name -> mavs.mavs.SystemInfo
+	12, // 2: mavs.mavs.QueryGetStoredVotingResponse.storedVoting:type_name -> mavs.mavs.StoredVoting
+	13, // 3: mavs.mavs.QueryAllStoredVotingRequest.pagination:type_name -> cosmos.base.query.v1beta1.PageRequest
+	12, // 4: mavs.mavs.QueryAllStoredVotingResponse.storedVoting:type_name -> mavs.mavs.StoredVoting
+	14, // 5: mavs.mavs.QueryAllStoredVotingResponse.pagination:type_name -> cosmos.base.query.v1beta1.PageResponse
+	15, // 6: mavs.mavs.QueryShowVoterResponse.voter:type_name -> mavs.mavs.Voter
+	0,  // 7: mavs.mavs.Query.Params:input_type -> mavs.mavs.QueryParamsRequest
+	2,  // 8: mavs.mavs.Query.SystemInfo:input_type -> mavs.mavs.QueryGetSystemInfoRequest
+	4,  // 9: mavs.mavs.Query.StoredVoting:input_type -> mavs.mavs.QueryGetStoredVotingRequest
+	6,  // 10: mavs.mavs.Query.StoredVotingAll:input_type -> mavs.mavs.QueryAllStoredVotingRequest
+	8,  // 11: mavs.mavs.Query.ShowVoter:input_type -> mavs.mavs.QueryShowVoterRequest
+	1,  // 12: mavs.mavs.Query.Params:output_type -> mavs.mavs.QueryParamsResponse
+	3,  // 13: mavs.mavs.Query.SystemInfo:output_type -> mavs.mavs.QueryGetSystemInfoResponse
+	5,  // 14: mavs.mavs.Query.StoredVoting:output_type -> mavs.mavs.QueryGetStoredVotingResponse
+	7,  // 15: mavs.mavs.Query.StoredVotingAll:output_type -> mavs.mavs.QueryAllStoredVotingResponse
+	9,  // 16: mavs.mavs.Query.ShowVoter:output_type -> mavs.mavs.QueryShowVoterResponse
+	12, // [12:17] is the sub-list for method output_type
+	7,  // [7:12] is the sub-list for method input_type
+	7,  // [7:7] is the sub-list for extension type_name
+	7,  // [7:7] is the sub-list for extension extendee
+	0,  // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_mavs_mavs_query_proto_init() }
@@ -3908,6 +4930,7 @@ func file_mavs_mavs_query_proto_init() {
 	file_mavs_mavs_params_proto_init()
 	file_mavs_mavs_system_info_proto_init()
 	file_mavs_mavs_stored_voting_proto_init()
+	file_mavs_mavs_voter_proto_init()
 	if !protoimpl.UnsafeEnabled {
 		file_mavs_mavs_query_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*QueryParamsRequest); i {
@@ -4005,6 +5028,30 @@ func file_mavs_mavs_query_proto_init() {
 				return nil
 			}
 		}
+		file_mavs_mavs_query_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*QueryShowVoterRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_mavs_mavs_query_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*QueryShowVoterResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -4012,7 +5059,7 @@ func file_mavs_mavs_query_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_mavs_mavs_query_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   8,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

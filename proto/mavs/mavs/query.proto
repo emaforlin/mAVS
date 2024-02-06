@@ -9,6 +9,7 @@ import "cosmos/base/query/v1beta1/pagination.proto";
 import "mavs/mavs/params.proto";
 import "mavs/mavs/system_info.proto";
 import "mavs/mavs/stored_voting.proto";
+import "mavs/mavs/voter.proto";
 
 option go_package = "github.com/emaforlin/mAVS/x/mavs/types";
 
@@ -34,6 +35,12 @@ service Query {
   }
   rpc StoredVotingAll (QueryAllStoredVotingRequest) returns (QueryAllStoredVotingResponse) {
     option (google.api.http).get = "/emaforlin/mAVS/mavs/stored_voting";
+  
+  }
+  
+  // Queries a list of ShowVoter items.
+  rpc ShowVoter (QueryShowVoterRequest) returns (QueryShowVoterResponse) {
+    option (google.api.http).get = "/emaforlin/mAVS/mavs/show_voter/{dni}/{votingId}";
   
   }
 }
@@ -68,5 +75,14 @@ message QueryAllStoredVotingRequest {
 message QueryAllStoredVotingResponse {
   repeated StoredVoting                           storedVoting = 1 [(gogoproto.nullable) = false];
            cosmos.base.query.v1beta1.PageResponse pagination   = 2;
+}
+
+message QueryShowVoterRequest {
+  string dni      = 1;
+  string votingId = 2;
+}
+
+message QueryShowVoterResponse {
+  Voter voter = 1;
 }
 
