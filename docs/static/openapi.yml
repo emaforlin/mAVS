@@ -19205,6 +19205,53 @@ paths:
               parameters.
       tags:
         - Msg
+  /emaforlin/mAVS/mavs/list_voters/{votingId}:
+    get:
+      summary: Queries a list of ListVoters items.
+      operationId: MavsMavsQuery_ListVoters
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              electoralRoll:
+                type: object
+                properties:
+                  voters:
+                    type: object
+                    additionalProperties:
+                      type: object
+                      properties:
+                        proofId:
+                          type: string
+                        hasVoted:
+                          type: boolean
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: votingId
+          in: path
+          required: true
+          type: string
+      tags:
+        - Query
   /emaforlin/mAVS/mavs/params:
     get:
       summary: Parameters queries the parameters of the module.
@@ -27583,6 +27630,21 @@ definitions:
           nextId:
             type: string
             format: uint64
+  mavs.mavs.QueryListVotersResponse:
+    type: object
+    properties:
+      electoralRoll:
+        type: object
+        properties:
+          voters:
+            type: object
+            additionalProperties:
+              type: object
+              properties:
+                proofId:
+                  type: string
+                hasVoted:
+                  type: boolean
   mavs.mavs.QueryParamsResponse:
     type: object
     properties:

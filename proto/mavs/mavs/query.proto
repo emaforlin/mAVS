@@ -10,6 +10,7 @@ import "mavs/mavs/params.proto";
 import "mavs/mavs/system_info.proto";
 import "mavs/mavs/stored_voting.proto";
 import "mavs/mavs/voter.proto";
+import "mavs/mavs/electoral_roll.proto";
 
 option go_package = "github.com/emaforlin/mAVS/x/mavs/types";
 
@@ -41,6 +42,12 @@ service Query {
   // Queries a list of ShowVoter items.
   rpc ShowVoter (QueryShowVoterRequest) returns (QueryShowVoterResponse) {
     option (google.api.http).get = "/emaforlin/mAVS/mavs/show_voter/{dni}/{votingId}";
+  
+  }
+  
+  // Queries a list of ListVoters items.
+  rpc ListVoters (QueryListVotersRequest) returns (QueryListVotersResponse) {
+    option (google.api.http).get = "/emaforlin/mAVS/mavs/list_voters/{votingId}";
   
   }
 }
@@ -84,5 +91,13 @@ message QueryShowVoterRequest {
 
 message QueryShowVoterResponse {
   Voter voter = 1;
+}
+
+message QueryListVotersRequest {
+  string votingId = 1;
+}
+
+message QueryListVotersResponse {
+  ElectoralRoll electoralRoll = 1;
 }
 

@@ -24,6 +24,7 @@ const (
 	Query_StoredVoting_FullMethodName    = "/mavs.mavs.Query/StoredVoting"
 	Query_StoredVotingAll_FullMethodName = "/mavs.mavs.Query/StoredVotingAll"
 	Query_ShowVoter_FullMethodName       = "/mavs.mavs.Query/ShowVoter"
+	Query_ListVoters_FullMethodName      = "/mavs.mavs.Query/ListVoters"
 )
 
 // QueryClient is the client API for Query service.
@@ -39,6 +40,8 @@ type QueryClient interface {
 	StoredVotingAll(ctx context.Context, in *QueryAllStoredVotingRequest, opts ...grpc.CallOption) (*QueryAllStoredVotingResponse, error)
 	// Queries a list of ShowVoter items.
 	ShowVoter(ctx context.Context, in *QueryShowVoterRequest, opts ...grpc.CallOption) (*QueryShowVoterResponse, error)
+	// Queries a list of ListVoters items.
+	ListVoters(ctx context.Context, in *QueryListVotersRequest, opts ...grpc.CallOption) (*QueryListVotersResponse, error)
 }
 
 type queryClient struct {
@@ -94,6 +97,15 @@ func (c *queryClient) ShowVoter(ctx context.Context, in *QueryShowVoterRequest, 
 	return out, nil
 }
 
+func (c *queryClient) ListVoters(ctx context.Context, in *QueryListVotersRequest, opts ...grpc.CallOption) (*QueryListVotersResponse, error) {
+	out := new(QueryListVotersResponse)
+	err := c.cc.Invoke(ctx, Query_ListVoters_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // QueryServer is the server API for Query service.
 // All implementations must embed UnimplementedQueryServer
 // for forward compatibility
@@ -107,6 +119,8 @@ type QueryServer interface {
 	StoredVotingAll(context.Context, *QueryAllStoredVotingRequest) (*QueryAllStoredVotingResponse, error)
 	// Queries a list of ShowVoter items.
 	ShowVoter(context.Context, *QueryShowVoterRequest) (*QueryShowVoterResponse, error)
+	// Queries a list of ListVoters items.
+	ListVoters(context.Context, *QueryListVotersRequest) (*QueryListVotersResponse, error)
 	mustEmbedUnimplementedQueryServer()
 }
 
@@ -128,6 +142,9 @@ func (UnimplementedQueryServer) StoredVotingAll(context.Context, *QueryAllStored
 }
 func (UnimplementedQueryServer) ShowVoter(context.Context, *QueryShowVoterRequest) (*QueryShowVoterResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ShowVoter not implemented")
+}
+func (UnimplementedQueryServer) ListVoters(context.Context, *QueryListVotersRequest) (*QueryListVotersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListVoters not implemented")
 }
 func (UnimplementedQueryServer) mustEmbedUnimplementedQueryServer() {}
 
@@ -232,6 +249,24 @@ func _Query_ShowVoter_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Query_ListVoters_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryListVotersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).ListVoters(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Query_ListVoters_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).ListVoters(ctx, req.(*QueryListVotersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Query_ServiceDesc is the grpc.ServiceDesc for Query service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -258,6 +293,10 @@ var Query_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ShowVoter",
 			Handler:    _Query_ShowVoter_Handler,
+		},
+		{
+			MethodName: "ListVoters",
+			Handler:    _Query_ListVoters_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

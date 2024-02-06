@@ -40,6 +40,13 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "dni"}, {ProtoField: "votingId"}},
 				},
 
+				{
+					RpcMethod:      "ListVoters",
+					Use:            "list-voters [voting-id]",
+					Short:          "Query listVoters",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "votingId"}},
+				},
+
 				// this line is used by ignite scaffolding # autocli/query
 			},
 		},

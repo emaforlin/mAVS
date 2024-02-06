@@ -17,7 +17,6 @@ func (k Keeper) ShowVoter(goCtx context.Context, req *types.QueryShowVoterReques
 
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	// TODO: Process the query
 	res, found := k.GetStoredVoting(ctx, req.VotingId)
 	if !found {
 		return nil, status.Error(codes.NotFound, "not found")
@@ -29,4 +28,19 @@ func (k Keeper) ShowVoter(goCtx context.Context, req *types.QueryShowVoterReques
 	return &types.QueryShowVoterResponse{
 		Voter: res.ElectoralRoll.Voters[dni],
 	}, nil
+}
+
+func (k Keeper) ListVoters(goCtx context.Context, req *types.QueryListVotersRequest) (*types.QueryListVotersResponse, error) {
+	if req == nil {
+		return nil, status.Error(codes.InvalidArgument, "invalid request")
+	}
+
+	ctx := sdk.UnwrapSDKContext(goCtx)
+
+	res, found := k.GetStoredVoting(ctx, req.VotingId)
+	if !found {
+		return nil, status.Error(codes.NotFound, "not found")
+	}
+
+	return &types.QueryListVotersResponse{ElectoralRoll: res.ElectoralRoll}, nil
 }
