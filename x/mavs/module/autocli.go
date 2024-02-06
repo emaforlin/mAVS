@@ -50,6 +50,12 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Short:          "Send a createVoting tx",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "title"}, {ProtoField: "timewindow"}, {ProtoField: "candidates"}},
 				},
+				{
+					RpcMethod:      "AddVoter",
+					Use:            "add-voter [voting-id] [dni] [proof-id]",
+					Short:          "Send a add-voter tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "votingId"}, {ProtoField: "dni"}, {ProtoField: "proofId"}},
+				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},
 		},

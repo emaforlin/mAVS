@@ -16,4 +16,6 @@ var (
 	ErrVotingTimeTooShort   = sdkerrors.Register(ModuleName, 1105, "minimum voting is one(1) hour")
 	ErrVotingCannotBeParsed = sdkerrors.Register(ModuleName, 1106, "voting cannot be parsed")
 	ErrNotEnoughCandidates  = sdkerrors.Register(ModuleName, 1107, "need more candidates")
+	ErrInvalidVotingId      = sdkerrors.Register(ModuleName, 1109, "invalid voting id")
+	ErrInvalidVoterId       = sdkerrors.Register(ModuleName, 1110, "invalid voter id")
 )

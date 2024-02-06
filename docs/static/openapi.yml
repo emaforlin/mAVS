@@ -19205,6 +19205,52 @@ paths:
               parameters.
       tags:
         - Msg
+  /mavs.mavs.Msg/AddVoter:
+    post:
+      operationId: MavsMavsMsg_AddVoter
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              creator:
+                type: string
+              votingId:
+                type: string
+              dni:
+                type: string
+              proofId:
+                type: string
+      tags:
+        - Msg
   /mavs.mavs.Msg/CreateVoting:
     post:
       operationId: MavsMavsMsg_CreateVoting
@@ -19369,7 +19415,16 @@ paths:
                       type: object
                       properties:
                         voters:
-                          type: string
+                          type: object
+                          additionalProperties:
+                            type: object
+                            properties:
+                              proofId:
+                                type: string
+                              hasVoted:
+                                type: boolean
+                    creator:
+                      type: string
               pagination:
                 type: object
                 properties:
@@ -19503,7 +19558,16 @@ paths:
                     type: object
                     properties:
                       voters:
-                        type: string
+                        type: object
+                        additionalProperties:
+                          type: object
+                          properties:
+                            proofId:
+                              type: string
+                            hasVoted:
+                              type: boolean
+                  creator:
+                    type: string
         default:
           description: An unexpected error response.
           schema:
@@ -27282,6 +27346,22 @@ definitions:
     description: |-
       Version defines the versioning scheme used to negotiate the IBC verison in
       the connection handshake.
+  mavs.mavs.MsgAddVoter:
+    type: object
+    properties:
+      creator:
+        type: string
+      votingId:
+        type: string
+      dni:
+        type: string
+      proofId:
+        type: string
+  mavs.mavs.MsgAddVoterResponse:
+    type: object
+    properties:
+      status:
+        type: string
   mavs.mavs.MsgCreateVoting:
     type: object
     properties:
@@ -27399,7 +27479,14 @@ definitions:
     type: object
     properties:
       voters:
-        type: string
+        type: object
+        additionalProperties:
+          type: object
+          properties:
+            proofId:
+              type: string
+            hasVoted:
+              type: boolean
   mavs.mavs.QueryAllStoredVotingResponse:
     type: object
     properties:
@@ -27423,7 +27510,16 @@ definitions:
               type: object
               properties:
                 voters:
-                  type: string
+                  type: object
+                  additionalProperties:
+                    type: object
+                    properties:
+                      proofId:
+                        type: string
+                      hasVoted:
+                        type: boolean
+            creator:
+              type: string
       pagination:
         type: object
         properties:
@@ -27471,7 +27567,16 @@ definitions:
             type: object
             properties:
               voters:
-                type: string
+                type: object
+                additionalProperties:
+                  type: object
+                  properties:
+                    proofId:
+                      type: string
+                    hasVoted:
+                      type: boolean
+          creator:
+            type: string
   mavs.mavs.QueryGetSystemInfoResponse:
     type: object
     properties:
@@ -27506,10 +27611,26 @@ definitions:
         type: object
         properties:
           voters:
-            type: string
+            type: object
+            additionalProperties:
+              type: object
+              properties:
+                proofId:
+                  type: string
+                hasVoted:
+                  type: boolean
+      creator:
+        type: string
   mavs.mavs.SystemInfo:
     type: object
     properties:
       nextId:
         type: string
         format: uint64
+  mavs.mavs.Voter:
+    type: object
+    properties:
+      proofId:
+        type: string
+      hasVoted:
+        type: boolean

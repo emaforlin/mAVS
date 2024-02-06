@@ -21,11 +21,20 @@ func (k msgServer) CreateVoting(goCtx context.Context, msg *types.MsgCreateVotin
 	newIndex := strconv.FormatUint(systemInfo.NextId, 10)
 	newVoting := directives.NewVoting(msg.Title, directives.VotingTimeFromString(msg.Timewindow), nil, strings.Split(msg.Candidates, " ")...)
 
+	roll := make(map[uint64]*types.Voter)
+	roll[0] = &types.Voter{
+		ProofId:  "0",
+		HasVoted: false,
+	}
 	storedVoting := types.StoredVoting{
 		Index:      newIndex,
 		Title:      msg.Title,
 		Timewindow: msg.Timewindow,
 		Counting:   newVoting.VoteCount,
+		Creator:    msg.Creator,
+		ElectoralRoll: &types.ElectoralRoll{
+			Voters: roll,
+		},
 	}
 
 	err := storedVoting.Validate()

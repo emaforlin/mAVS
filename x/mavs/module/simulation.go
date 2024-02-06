@@ -27,6 +27,10 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgCreateVoting int = 100
 
+	opWeightMsgAddVoter = "op_weight_msg_add_voter"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgAddVoter int = 100
+
 	// this line is used by starport scaffolding # simapp/module/const
 )
 
@@ -66,6 +70,17 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 		mavssimulation.SimulateMsgCreateVoting(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
+	var weightMsgAddVoter int
+	simState.AppParams.GetOrGenerate(opWeightMsgAddVoter, &weightMsgAddVoter, nil,
+		func(_ *rand.Rand) {
+			weightMsgAddVoter = defaultWeightMsgAddVoter
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgAddVoter,
+		mavssimulation.SimulateMsgAddVoter(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
 	// this line is used by starport scaffolding # simapp/module/operation
 
 	return operations
@@ -79,6 +94,14 @@ func (am AppModule) ProposalMsgs(simState module.SimulationState) []simtypes.Wei
 			defaultWeightMsgCreateVoting,
 			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
 				mavssimulation.SimulateMsgCreateVoting(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgAddVoter,
+			defaultWeightMsgAddVoter,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				mavssimulation.SimulateMsgAddVoter(am.accountKeeper, am.bankKeeper, am.keeper)
 				return nil
 			},
 		),
