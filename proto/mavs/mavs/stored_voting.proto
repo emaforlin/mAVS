@@ -11,6 +11,7 @@ message StoredVoting {
   map<string, uint64> counting = 3;
   string title = 4;
   ElectoralRoll electoral_roll = 5;
+  string creator = 6;
 
   
 }
